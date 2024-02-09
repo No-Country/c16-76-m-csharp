@@ -71,5 +71,6 @@ EmpleaGestión es una aplicación de gestión de empleados diseñada para facili
 |Tipo|Nombre|
 |----|------|
 | Videollamadas y Chat | ![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=Discord&logoColor=fff) |
+| Videollamadas y Chat | ![Github Projects](https://img.shields.io/badge/google%20meet-ffffff?style=for-the-badge&logo=googleMeet&logoColor=red) |
 | Chat | ![Slack](https://img.shields.io/badge/Slack-%234A154B?style=for-the-badge&logo=Slack&logoColor=white) |
 | Gestor de Tareas | ![Github Projects](https://img.shields.io/badge/github-00000?style=for-the-badge&logo=github&color=black) |
