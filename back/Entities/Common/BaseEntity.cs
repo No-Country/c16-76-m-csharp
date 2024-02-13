@@ -2,7 +2,7 @@
 {
     public class BaseEntity
     {
-        public virtual int Id { get; set; }
+        public virtual string Id { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string LastModifiedBy { get; set; }
