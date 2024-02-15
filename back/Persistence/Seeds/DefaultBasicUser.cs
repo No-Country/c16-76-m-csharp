@@ -1,5 +1,5 @@
 ﻿using back.Enums;
-using EmpleaGestion.Entities.User;
+using back.Entities.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace back.Persistence.Seeds

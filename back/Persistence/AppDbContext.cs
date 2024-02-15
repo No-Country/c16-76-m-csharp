@@ -1,7 +1,7 @@
 ﻿using back.Interfaces;
-using EmpleaGestion.Entities;
-using EmpleaGestion.Entities.Common;
-using EmpleaGestion.Entities.User;
+using back.Entities;
+using back.Entities.Common;
+using back.Entities.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -31,6 +31,7 @@ namespace back.Persistence
                         entry.Entity.CreatedAt = _dateTime.NowUtc;
                         entry.Entity.LastModifiedBy = "Initial User";
                         entry.Entity.LastModifiedAt = _dateTime.NowUtc;
+                        entry.Entity.IsDeleted = false;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedBy = "Example User";
