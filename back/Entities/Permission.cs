@@ -1,6 +1,6 @@
-﻿using EmpleaGestion.Entities.Common;
+﻿using back.Entities.Common;
 
-namespace EmpleaGestion.Entities
+namespace back.Entities
 {
     public class Permission : BaseEntity
     {
