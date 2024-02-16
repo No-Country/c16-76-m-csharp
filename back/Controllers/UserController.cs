@@ -1,6 +1,7 @@
 using back.DTOs;
 using back.Entities.User;
 using back.Interfaces;
+using back.Utilities.Base;
 using Microsoft.AspNetCore.Mvc;
 namespace back.Controller;
 
@@ -16,94 +17,58 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<AppUser>> GetAll(int limit)
+    public ActionResult<BaseResponse<AppUser>> GetAll(int limit)
     {
-        return Ok(new
-        {
-            statusCode = 200,
-            result = _userService.GetAll(limit).Result
-        });
+        return Ok(_userService.GetAll(limit).Result);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<AppUser?> GetById(string id)
+    public ActionResult<BaseResponse<AppUser>> GetById(string id)
     {
 
         var user = _userService.GetById(id).Result;
 
-        if (user is null)
-            return NotFound(new
-            {
-                statusCode = 404,
-                result = user
-            });
+        if (user.Data is null)
+            return NotFound(user);
 
-        return Ok(new
-        {
-            statusCode = 200,
-            result = user
-        });
+        return Ok(user);
     }
 
     [HttpPost]
-    public ActionResult<bool?> Create(UserDto userDto)
+    public ActionResult<BaseResponse<bool>> Create(UserDto userDto)
     {
 
         var user = _userService.Create(userDto).Result;
 
-        if (!user)
-            return BadRequest(new
-            {
-                statusCode = 400,
-                result = user
-            });
+        if (!user.IsSuccess)
+            return BadRequest(user);
 
-        return Created(
-            nameof(GetAll),
-            new
-            {
-                statusCode = 201,
-                result = user
-            });
+        return Created(nameof(GetAll), user);
     }
 
     [HttpPut("{id}")]
-    public ActionResult<bool?> Update(string id, UserDto userDto)
+    public ActionResult<BaseResponse<bool>> Update(string id, UserDto userDto)
     {
         var user = _userService.Update(id, userDto).Result;
 
-        if (!user)
-            return NotFound(new
-            {
-                statusCode = 404,
-                result = user
-            });
+        if (!user.Data)
+            return NotFound(user);
 
-        return Ok(
-            new
-            {
-                statusCode = 200,
-                result = user
-            });
+        if (!user.IsSuccess)
+            return BadRequest(user);
+
+
+        return Ok(user);
     }
 
     [HttpDelete("{id}")]
-    public ActionResult<bool?> Delete(string id)
+    public ActionResult<BaseResponse<bool>> Delete(string id)
     {
         var user = _userService.Delete(id).Result;
 
-        if (!user)
-            return NotFound(new
-            {
-                statusCode = 404,
-                result = user
-            });
+        if (!user.IsSuccess)
+            return NotFound(user);
 
-        return Ok(
-            new
-            {
-                statusCode = 200,
-                result = user
-            });
+        return Ok(user);
     }
 }
