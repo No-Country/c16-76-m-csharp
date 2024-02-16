@@ -2,9 +2,12 @@ using back.Interfaces;
 using back.Persistence;
 using back.Persistence.Seeds;
 using back.Services;
-using EmpleaGestion.Entities.User;
+using back.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using back.DTOs;
+using back.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -19,6 +23,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -48,7 +54,7 @@ try
 catch (Exception)
 {
 
-	throw;
+    throw;
 }
 
 async Task SeedUsers()

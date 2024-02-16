@@ -1,4 +1,4 @@
-﻿namespace EmpleaGestion.Entities.Common
+﻿namespace back.Entities.Common
 {
     public class BaseEntity
     {
