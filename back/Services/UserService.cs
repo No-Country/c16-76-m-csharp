@@ -1,9 +1,9 @@
 using back.DTOs;
-using back.Entities;
 using back.Entities.User;
 using back.Interfaces;
 using back.Persistence;
-using back.Utilities;
+using back.Utilities.Base;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace back.Services;
@@ -11,82 +11,153 @@ namespace back.Services;
 class UserService : IUserService
 {
     private readonly AppDbContext _appDbContext;
+    private readonly IValidator<UserDto> _userDtoValidator;
 
-    public UserService(AppDbContext appDbContext)
+    public UserService(AppDbContext appDbContext, IValidator<UserDto> userValidator)
     {
         _appDbContext = appDbContext;
+        _userDtoValidator = userValidator;
     }
 
-    public async Task<bool> Create(UserDto userDto)
+    public async Task<BaseResponse<bool>> Create(UserDto userDto)
     {
-        if (userDto is null)
-            return false;
+        var validator = await _userDtoValidator.ValidateAsync(userDto);
+        var response = new BaseResponse<bool>();
 
-        var passwordHash = PasswordHasher.Hash(userDto.Password);
+        if (!validator.IsValid)
+        {
+            response.Errors = validator.Errors;
+            response.StatusCode = 404;
+            response.IsSuccess = false;
+            return response;
+        }
 
         AppUser user = new()
         {
             FirstName = userDto.FirstName,
             LastName = userDto.LastName,
-            PasswordHash = passwordHash,
+            PasswordHash = userDto.PasswordHash,
             Email = userDto.Email,
             PhoneNumber = userDto.PhoneNumber,
         };
 
-        _appDbContext.Users.Add(user);
+        _appDbContext.Add(user);
         await _appDbContext.SaveChangesAsync();
 
-        return true;
+        response.IsSuccess = true;
+        response.StatusCode = 201;
+        response.Message = "The employee has been created succesfully!";
+
+        return response;
     }
 
-    public async Task<bool> Delete(string id)
+    public async Task<BaseResponse<AppUser>> GetAll(int limit)
     {
-        return false;
-    }
-
-    public async Task<IEnumerable<AppUser>> GetAll(int limit)
-    {
-        return await _appDbContext.Users
+        var users = await _appDbContext.Users
             .Take(limit)
+            // .Include(p=>p.Profile)
+            // .Where(p => !p.Profile.IsDeleted)
             .ToListAsync();
+
+        return new BaseResponse<AppUser>()
+        {
+            IsSuccess = true,
+            StatusCode = 200,
+            Items = users,
+            TotalRecords = users.Count
+        };
     }
 
-    public async Task<AppUser> GetById(string id)
+    public async Task<BaseResponse<AppUser>> GetById(string id)
     {
         var user = await _appDbContext.Users.FindAsync(id);
+        var response = new BaseResponse<AppUser>();
 
         if (user is null)
-            return null!;
+        {
+            response.IsSuccess = false;
+            response.StatusCode = 404;
+            response.Message = $"Employee with id {id} not found";
+            response.Data = user;
+            return response;
+        }
 
-        return user;
+        response.IsSuccess = true;
+        response.StatusCode = 200;
+        response.Data = user;
+
+        return response;
     }
 
-    // Don't work
-    public async Task<bool> Update(string id, UserDto userDto)
+    public async Task<BaseResponse<bool>> Update(string id, UserDto userDto)
     {
         var user = GetById(id).Result;
-        _appDbContext.ChangeTracker.Clear();
+        var validator = await _userDtoValidator.ValidateAsync(userDto);
+        var response = new BaseResponse<bool>();
 
-        if (user is null)
-            return false;
 
-        AppUser putUser = new()
+        if (user.Data is null)
         {
-            Id = user.Id,
-            FirstName = userDto.FirstName,
-            LastName = userDto.LastName,
-            PasswordHash = user.PasswordHash,
-            Email = userDto.Email,
-            PhoneNumber = userDto.PhoneNumber,
-            PhoneNumberConfirmed = user.PhoneNumberConfirmed,
-            AccessFailedCount = user.AccessFailedCount,
-            TwoFactorEnabled = user.TwoFactorEnabled,
-            EmailConfirmed = user.EmailConfirmed,
-        };
+            response.StatusCode = user.StatusCode;
+            response.IsSuccess = user.IsSuccess;
+            response.Message = user.Message;
+            response.Data = false;
 
-        _appDbContext.Update(putUser);
-        _appDbContext.SaveChanges();
+            return response;
+        }
 
-        return true;
+        if (!validator.IsValid)
+        {
+            response.StatusCode = 400;
+            response.IsSuccess = false;
+            response.Errors = validator.Errors;
+            response.Data = true;
+
+            return response;
+        }
+
+        user.Data.UserName = userDto.UserName;
+        user.Data.FirstName = userDto.FirstName;
+        user.Data.LastName = userDto.LastName;
+        user.Data.Email = userDto.Email;
+        user.Data.PhoneNumber = userDto.PhoneNumber;
+
+        _appDbContext.Update(user.Data);
+        await _appDbContext.SaveChangesAsync();
+
+        response.StatusCode = 200;
+        response.IsSuccess = true;
+        response.Data = true;
+        response.Message = $"The employee {user?.Data?.FirstName} has been updated successfully";
+
+        return response;
+    }
+
+    public async Task<BaseResponse<bool>> Delete(string id)
+    {
+        var user = GetById(id).Result;
+        var response = new BaseResponse<bool>();
+
+        if (user.Data is null)
+        {
+            response.StatusCode = user.StatusCode;
+            response.IsSuccess = user.IsSuccess;
+            response.Message = user.Message;
+            response.Data = false;
+
+            return response;
+        }
+
+        // Soft delete
+        // user?.Profile?.IsDeleted = true;
+
+        await _appDbContext.SaveChangesAsync();
+
+        response.IsSuccess = true;
+        response.StatusCode = 200;
+        response.Data = true;
+        response.Message = $"The employee with id {user?.Data?.Id} has been removed successfully";
+
+        return response;
     }
 }
