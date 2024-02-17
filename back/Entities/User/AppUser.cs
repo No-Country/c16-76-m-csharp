@@ -8,5 +8,6 @@ namespace back.Entities.User
         public string LastName { get; set; }
         //public string ProfileId { get; set; }
         //public Profile Profile { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

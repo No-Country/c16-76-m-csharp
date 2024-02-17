@@ -19,12 +19,6 @@ public class UserDtoValidator : AbstractValidator<UserDto>
             .NotNull()
             .NotEmpty()
             .WithMessage("The last name is required.");
-        RuleFor(user => user.PasswordHash)
-            .NotNull()
-            .NotEmpty()
-            .WithMessage("The password is required.")
-            .GreaterThan("5")
-            .WithMessage("The password must be greater than 5 characters.");
         RuleFor(user => user.Email)
             .NotNull()
             .NotEmpty()

@@ -1,5 +1,4 @@
 using back.DTOs;
-using back.Entities.User;
 using back.Interfaces;
 using back.Utilities.Base;
 using Microsoft.AspNetCore.Mvc;
@@ -17,57 +16,44 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<BaseResponse<AppUser>> GetAll(int limit)
+    public async Task<IActionResult> GetAll(int pageSize, int pageNumber)
     {
-        return Ok(_userService.GetAll(limit).Result);
+        return Ok(_userService.GetAll(pageSize, pageNumber).Result);
     }
 
     [HttpGet("{id}")]
-    public ActionResult<BaseResponse<AppUser>> GetById(string id)
+    public async Task<IActionResult> GetById(string id)
     {
+        if (id == null) return BadRequest("Id was not provided");
 
         var user = _userService.GetById(id).Result;
-
-        if (user.Data is null)
-            return NotFound(user);
 
         return Ok(user);
     }
 
     [HttpPost]
-    public ActionResult<BaseResponse<bool>> Create(UserDto userDto)
+    public async Task<IActionResult> Create(UserRequestDTO dto)
     {
-
-        var user = _userService.Create(userDto).Result;
-
-        if (!user.IsSuccess)
-            return BadRequest(user);
-
-        return Created(nameof(GetAll), user);
+        var user = await _userService.Create(dto);
+        return Ok(user);
     }
 
-    [HttpPut("{id}")]
-    public ActionResult<BaseResponse<bool>> Update(string id, UserDto userDto)
+    [HttpPut("{email}")]
+    public async Task<IActionResult> Update(string email, UserRequestDTO dto)
     {
-        var user = _userService.Update(id, userDto).Result;
+        if (email == null) return BadRequest("Email was not provided");
 
-        if (!user.Data)
-            return NotFound(user);
-
-        if (!user.IsSuccess)
-            return BadRequest(user);
-
+        var user = _userService.Update(email, dto).Result;
 
         return Ok(user);
     }
 
-    [HttpDelete("{id}")]
-    public ActionResult<BaseResponse<bool>> Delete(string id)
+    [HttpDelete("{email}")]
+    public async Task<IActionResult> Delete(string email)
     {
-        var user = _userService.Delete(id).Result;
+        if (email == null) return BadRequest("Email was not provided");
 
-        if (!user.IsSuccess)
-            return NotFound(user);
+        var user = _userService.Delete(email).Result;
 
         return Ok(user);
     }

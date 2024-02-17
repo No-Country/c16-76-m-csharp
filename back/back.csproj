@@ -40,7 +40,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="DTOs\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Utilities\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

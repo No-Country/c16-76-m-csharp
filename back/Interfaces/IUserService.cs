@@ -6,10 +6,9 @@ namespace back.Interfaces;
 
 public interface IUserService
 {
-    public Task<BaseResponse<bool>> Create(UserDto userDto);
-    // public Task<BaseResponse<AppUser>> GetAll(int limit);
-    public Task<BaseResponse<AppUser>> GetAll(int limit);
-    public Task<BaseResponse<AppUser>> GetById(string id);
-    public Task<BaseResponse<bool>> Update(string id, UserDto userDto);
-    public Task<BaseResponse<bool>> Delete(string id);
+    public Task<BaseResponse<string>> Create(UserRequestDTO dto);
+    public Task<BaseResponse<List<UserDto>>> GetAll(int pageSize, int pageNumber);
+    public Task<BaseResponse<UserDto>> GetById(string id);
+    public Task<BaseResponse<string>> Update(string email, UserRequestDTO dto);
+    public Task<BaseResponse<string>> Delete(string email);
 }

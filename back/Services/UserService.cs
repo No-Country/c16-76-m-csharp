@@ -1,9 +1,12 @@
+using AutoMapper;
 using back.DTOs;
 using back.Entities.User;
+using back.Enums;
 using back.Interfaces;
 using back.Persistence;
 using back.Utilities.Base;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace back.Services;
@@ -11,153 +14,171 @@ namespace back.Services;
 class UserService : IUserService
 {
     private readonly AppDbContext _appDbContext;
-    private readonly IValidator<UserDto> _userDtoValidator;
+    private readonly IValidator<UserRequestDTO> _userRequestDTO;
+    private readonly UserManager<AppUser> _userManager;
+    private readonly IMapper _mapper;
 
-    public UserService(AppDbContext appDbContext, IValidator<UserDto> userValidator)
+    public UserService(
+        AppDbContext appDbContext, 
+        IValidator<UserRequestDTO> userRequestDTO,
+        UserManager<AppUser> userManager,
+        IMapper mapper)
     {
         _appDbContext = appDbContext;
-        _userDtoValidator = userValidator;
+        _userRequestDTO = userRequestDTO;
+        _userManager = userManager;
+        _mapper = mapper;
     }
 
-    public async Task<BaseResponse<bool>> Create(UserDto userDto)
-    {
-        var validator = await _userDtoValidator.ValidateAsync(userDto);
-        var response = new BaseResponse<bool>();
-
-        if (!validator.IsValid)
-        {
-            response.Errors = validator.Errors;
-            response.StatusCode = 404;
-            response.IsSuccess = false;
-            return response;
-        }
-
-        AppUser user = new()
-        {
-            FirstName = userDto.FirstName,
-            LastName = userDto.LastName,
-            PasswordHash = userDto.PasswordHash,
-            Email = userDto.Email,
-            PhoneNumber = userDto.PhoneNumber,
-        };
-
-        _appDbContext.Add(user);
-        await _appDbContext.SaveChangesAsync();
-
-        response.IsSuccess = true;
-        response.StatusCode = 201;
-        response.Message = "The employee has been created succesfully!";
-
-        return response;
-    }
-
-    public async Task<BaseResponse<AppUser>> GetAll(int limit)
+    // Get All User
+    public async Task<BaseResponse<List<UserDto>>> GetAll(int pageSize, int pageNumber)
     {
         var users = await _appDbContext.Users
-            .Take(limit)
+            .OrderBy(x => x.UserName)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             // .Include(p=>p.Profile)
             // .Where(p => !p.Profile.IsDeleted)
             .ToListAsync();
 
-        return new BaseResponse<AppUser>()
-        {
-            IsSuccess = true,
-            StatusCode = 200,
-            Items = users,
-            TotalRecords = users.Count
-        };
+        var usersDTO = _mapper.Map<List<UserDto>>(users);
+
+        return new BaseResponse<List<UserDto>>(usersDTO) { };
     }
 
-    public async Task<BaseResponse<AppUser>> GetById(string id)
+    // Get user by Id
+    public async Task<BaseResponse<UserDto>> GetById(string id)
     {
         var user = await _appDbContext.Users.FindAsync(id);
-        var response = new BaseResponse<AppUser>();
+        var dto = _mapper.Map<UserDto>(user);
 
-        if (user is null)
+        var response = new BaseResponse<UserDto>();
+
+        if (user == null)
         {
-            response.IsSuccess = false;
-            response.StatusCode = 404;
-            response.Message = $"Employee with id {id} not found";
-            response.Data = user;
-            return response;
+            return new BaseResponse<UserDto>($"There are not records with id: {id}") { };
         }
 
-        response.IsSuccess = true;
-        response.StatusCode = 200;
-        response.Data = user;
-
-        return response;
+        return new BaseResponse<UserDto>(dto) { };
     }
 
-    public async Task<BaseResponse<bool>> Update(string id, UserDto userDto)
+    // Create User
+    public async Task<BaseResponse<string>> Create(UserRequestDTO dto)
     {
-        var user = GetById(id).Result;
-        var validator = await _userDtoValidator.ValidateAsync(userDto);
-        var response = new BaseResponse<bool>();
-
-
-        if (user.Data is null)
-        {
-            response.StatusCode = user.StatusCode;
-            response.IsSuccess = user.IsSuccess;
-            response.Message = user.Message;
-            response.Data = false;
-
-            return response;
-        }
+        var validator = await _userRequestDTO.ValidateAsync(dto);
 
         if (!validator.IsValid)
         {
-            response.StatusCode = 400;
-            response.IsSuccess = false;
-            response.Errors = validator.Errors;
-            response.Data = true;
-
-            return response;
+            return new BaseResponse<string>("One or more validation errors were made") {
+                Errors = validator.Errors.Select(x => x.ErrorMessage).ToList()
+            };
         }
 
-        user.Data.UserName = userDto.UserName;
-        user.Data.FirstName = userDto.FirstName;
-        user.Data.LastName = userDto.LastName;
-        user.Data.Email = userDto.Email;
-        user.Data.PhoneNumber = userDto.PhoneNumber;
+        var userWithTheSameName = await _userManager.FindByNameAsync(dto.UserName);
+        if (userWithTheSameName != null)
+        {
+            return new BaseResponse<string>($"User: {dto.UserName} already exists") { };
+        }
 
-        _appDbContext.Update(user.Data);
-        await _appDbContext.SaveChangesAsync();
+        var user = _mapper.Map<AppUser>(dto);
 
-        response.StatusCode = 200;
-        response.IsSuccess = true;
-        response.Data = true;
-        response.Message = $"The employee {user?.Data?.FirstName} has been updated successfully";
+        var userWithTheSameEmail = await _userManager.FindByEmailAsync(dto.Email);
+        if (userWithTheSameEmail != null)
+        {
+            return new BaseResponse<string>($"User's email: {dto.Email} already exists") { };
+        }
 
-        return response;
+        var result = await _userManager.CreateAsync(user, dto.Password);
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, Roles.Employee.ToString());
+
+            return new BaseResponse<string>(user.Id, $"The employee {user.UserName} has been created succesfully!");
+        }
+        else
+        {
+            return new BaseResponse<string>("Something went wrong, the user could not be created")
+            {
+                Errors = result.Errors.Select(x => x.Description).ToList()
+            };
+        }
     }
 
-    public async Task<BaseResponse<bool>> Delete(string id)
+    // Update User
+    public async Task<BaseResponse<string>> Update(string email, UserRequestDTO dto)
     {
-        var user = GetById(id).Result;
-        var response = new BaseResponse<bool>();
+        var validator = await _userRequestDTO.ValidateAsync(dto);
 
-        if (user.Data is null)
+        if (!validator.IsValid)
         {
-            response.StatusCode = user.StatusCode;
-            response.IsSuccess = user.IsSuccess;
-            response.Message = user.Message;
-            response.Data = false;
-
-            return response;
+            return new BaseResponse<string>("One or more validation errors were made")
+            {
+                Errors = validator.Errors.Select(x => x.ErrorMessage).ToList()
+            };
         }
 
-        // Soft delete
-        // user?.Profile?.IsDeleted = true;
+        // This validation works to check if the User Name we are trying to change is alredy used for another user
+        var userWithTheSameName = await _userManager.FindByNameAsync(dto.UserName);
+        if (userWithTheSameName != null)
+        {
+            return new BaseResponse<string>($"User: {dto.UserName} already exists") { };
+        }
 
-        await _appDbContext.SaveChangesAsync();
+        // This validation works to check if the email we are trying to chage is alredy used for another user
+        var userWithTheSameEmail = await _userManager.FindByEmailAsync(dto.Email);
+        if (userWithTheSameEmail != null)
+        {
+            return new BaseResponse<string>($"User's email: {dto.Email} already exists") { };
+        }
 
-        response.IsSuccess = true;
-        response.StatusCode = 200;
-        response.Data = true;
-        response.Message = $"The employee with id {user?.Data?.Id} has been removed successfully";
+        // This validation works to check if this user does not exists
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            return new BaseResponse<string>($"There are not records with email: {email}") { };
+        }
 
-        return response;
+        user.FirstName = dto.FirstName;
+        user.LastName = dto.LastName;
+        user.UserName = dto.UserName;
+        user.Email = dto.Email;
+
+        var result = await _userManager.UpdateAsync(user);
+        if (result.Succeeded)
+        {
+            return new BaseResponse<string>(user.Id, $"The employee {user.UserName} has been updated succesfully!");
+        }
+        else
+        {
+            return new BaseResponse<string>("Something went wrong, the user could not be updated")
+            {
+                Errors = result.Errors.Select(x => x.Description).ToList()
+            };
+        }
+    }
+
+    // Delete User
+    public async Task<BaseResponse<string>> Delete(string email)
+    {
+        var user = await _userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            return new BaseResponse<string>($"There are not records with email: {email}") { };
+        }
+
+        user.IsDeleted = true;
+
+        var result = await _userManager.UpdateAsync(user);
+        if (result.Succeeded)
+        {
+            return new BaseResponse<string>(user.Id, $"The employee {user.UserName} has been deleted succesfully!");
+        }
+        else
+        {
+            return new BaseResponse<string>("Something went wrong, the user could not be deleted")
+            {
+                Errors = result.Errors.Select(x => x.Description).ToList()
+            };
+        }
     }
 }

@@ -13,9 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddControllers();
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
+builder.Services.AddTransient<IValidator<UserRequestDTO>, RegisterUserDTOValidator>();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -23,8 +27,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
-
-builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
