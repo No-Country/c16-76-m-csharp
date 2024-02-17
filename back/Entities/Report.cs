@@ -1,4 +1,4 @@
-﻿namespace EmpleaGestion.Entities
+﻿namespace back.Entities
 {
     public class Report
     {

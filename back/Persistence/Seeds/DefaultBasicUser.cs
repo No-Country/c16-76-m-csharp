@@ -1,5 +1,5 @@
 ﻿using back.Enums;
-using EmpleaGestion.Entities.User;
+using back.Entities.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace back.Persistence.Seeds
@@ -8,7 +8,7 @@ namespace back.Persistence.Seeds
     {
         public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 35; i++)
             {
                 // Seed Default Admin User
                 var defaultUser = new AppUser

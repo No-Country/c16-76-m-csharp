@@ -1,7 +1,7 @@
-﻿using EmpleaGestion.Entities.Common;
+﻿using back.Entities.Common;
 using Microsoft.AspNetCore.Identity;
 
-namespace EmpleaGestion.Entities
+namespace back.Entities
 {
     public class Profile : BaseEntity
     {

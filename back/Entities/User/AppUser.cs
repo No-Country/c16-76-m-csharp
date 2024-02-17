@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace EmpleaGestion.Entities.User
+namespace back.Entities.User
 {
     public class AppUser : IdentityUser
     {
@@ -8,5 +8,6 @@ namespace EmpleaGestion.Entities.User
         public string LastName { get; set; }
         //public string ProfileId { get; set; }
         //public Profile Profile { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

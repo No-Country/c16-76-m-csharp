@@ -2,16 +2,24 @@ using back.Interfaces;
 using back.Persistence;
 using back.Persistence.Seeds;
 using back.Services;
-using EmpleaGestion.Entities.User;
+using back.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation;
+using back.DTOs;
+using back.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddControllers();
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
+builder.Services.AddTransient<IValidator<UserRequestDTO>, RegisterUserDTOValidator>();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -48,7 +56,7 @@ try
 catch (Exception)
 {
 
-	throw;
+    throw;
 }
 
 async Task SeedUsers()
