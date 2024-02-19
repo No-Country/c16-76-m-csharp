@@ -28,14 +28,14 @@ const routes: Routes = [
         component: TypographyComponent,
         data: {
           title: 'Asistencia',
-      },
+        },
       },
       {
         path: 'typography',
         component: TypographyComponent,
         data: {
           title: 'Desempeño',
-      },
+        },
       },
     ],
   },
