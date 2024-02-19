@@ -6,6 +6,7 @@ import {
   BadgeComponent,
   SpinnerComponent,
   ButtonModule,
+  FormModule,
 } from '@coreui/angular';
 
 @Component({
@@ -17,7 +18,7 @@ import {
     AvatarModule,
     BadgeComponent,
     SpinnerComponent,
-
+    FormModule,
     ButtonModule,
   ],
   templateUrl: './dash-board-employes.component.html',
