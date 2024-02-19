@@ -3,17 +3,17 @@ import { INavData } from '@coreui/angular';
 export const navItems: INavData[] = [
   {
     name: 'Panel de Empleados',
-    url: '/dash-board-employes',
+    url: '/panel',
     iconComponent: { name: 'cil-speedometer' },
   },
   {
     name: 'Solicitudes',
-    url: '/solicitudes/solicitudes',
+    url: '/solicitudes',
     iconComponent: { name: 'cil-drop' },
   },
   {
     name: 'Asistencia',
-    url: '/theme/typography',
+    url: '/asistencias',
     linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-pencil' },
   },
