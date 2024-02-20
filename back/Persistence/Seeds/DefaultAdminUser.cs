@@ -13,10 +13,11 @@ namespace back.Persistence.Seeds
             {
                 UserName = "userAdmin",
                 Email = "userAdmin@mail.com",
-                FirstName = "FirstName",
-                LastName = "LastName",
+                FirstName = "Admin",
+                LastName = "Admin",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumberConfirmed = true,
+                Profile = EntityRelationMethods.SeedProfile()
             };
 
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
