@@ -4,6 +4,7 @@ import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { EmployeeListComponent } from './employees//employee-list/employee-list.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,9 @@ const routes: Routes = [
     data: {
       title: 'Register Page'
     }
-  }
+  },
+  // A partir de este punto agregaré nuevas rutas
+  {path: 'employees', component: EmployeeListComponent, data: {title: 'Lista de Empleados'}}
 ];
 
 @NgModule({

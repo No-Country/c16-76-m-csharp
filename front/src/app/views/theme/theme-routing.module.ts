@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ColorsComponent } from './colors.component';
 import { TypographyComponent } from './typography.component';
+import { EmployeeListComponent } from '../pages/employees/employee-list/employee-list.component';
 
 const routes: Routes = [
   {
@@ -28,15 +29,22 @@ const routes: Routes = [
         component: TypographyComponent,
         data: {
           title: 'Asistencia',
-      },
+        },
       },
       {
         path: 'typography',
         component: TypographyComponent,
         data: {
           title: 'Desempeño',
+        },
       },
-      },
+      {
+        path: 'employees',
+        component: EmployeeListComponent,
+        data: {
+          title: 'Empleados',
+        },
+      }
     ],
   },
 ];
@@ -45,4 +53,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ThemeRoutingModule {}
+export class ThemeRoutingModule { }
