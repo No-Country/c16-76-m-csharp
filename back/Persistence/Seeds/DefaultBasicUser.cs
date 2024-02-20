@@ -1,5 +1,5 @@
-﻿using back.Enums;
-using back.Entities.User;
+﻿using back.Entities.User;
+using back.Enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace back.Persistence.Seeds
@@ -15,10 +15,11 @@ namespace back.Persistence.Seeds
                 {
                     UserName = $"user{i}Basic",
                     Email = $"userBasic{i}@mail.com",
-                    FirstName = $"Neme{i}",
-                    LastName = $"LasName{i}",
+                    FirstName = $"Name{i}",
+                    LastName = $"LastName{i}",
                     EmailConfirmed = true,
-                    PhoneNumberConfirmed = true
+                    PhoneNumberConfirmed = true,
+                    Profile = EntityRelationMethods.SeedProfile()
                 };
 
                 if (userManager.Users.All(u => u.Id != defaultUser.Id))

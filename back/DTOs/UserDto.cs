@@ -1,3 +1,5 @@
+using back.Entities;
+
 namespace back.DTOs;
 
 public class UserDto
@@ -9,6 +11,7 @@ public class UserDto
     // public string PasswordHash { get; set; } // Mejor no exponer esta info
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
+    public UserProfile Profile { get; set; }
 
     //public string ProfileId { get; set; }
 }

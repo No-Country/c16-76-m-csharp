@@ -33,8 +33,9 @@ class UserService : IUserService
     // Get All User
     public async Task<BaseResponse<List<UserDto>>> GetAll(int pageSize, int pageNumber)
     {
-        var users = await _appDbContext.Users
+        var users = await _appDbContext.AppUsers
             .OrderBy(x => x.UserName)
+            .Where(x => x.IsDeleted == false)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             // .Include(p=>p.Profile)
@@ -49,7 +50,7 @@ class UserService : IUserService
     // Get user by Id
     public async Task<BaseResponse<UserDto>> GetById(string id)
     {
-        var user = await _appDbContext.Users.FindAsync(id);
+        var user = await _appDbContext.AppUsers.FindAsync(id);
         var dto = _mapper.Map<UserDto>(user);
 
         var response = new BaseResponse<UserDto>();

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using back.DTOs;
 using back.Validations;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();

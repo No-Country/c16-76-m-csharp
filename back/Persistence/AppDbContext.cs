@@ -18,7 +18,13 @@ namespace back.Persistence
             _dateTime = dateTime;
         }
 
+        public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<PermissionType> PermissionTypes { get; set; }
+        public DbSet<UserProfile> Profiles { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        //public DbSet<Assignment> Assignments { get; set; }
+        //public DbSet<BenefitsSummary> BenefitsSummaries { get; set; }
+        //public DbSet<Report> Reports { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
