@@ -17,4 +17,10 @@ export const navItems: INavData[] = [
     linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-pencil' },
   },
+  {
+    name: 'Empleados',
+    url: '/theme/employees',
+    linkProps: { fragment: 'someAnchor' },
+    iconComponent: { name: 'cil-speedometer' }
+  },
 ];

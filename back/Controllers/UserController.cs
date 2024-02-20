@@ -16,9 +16,10 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(int pageSize, int pageNumber)
+    // public async Task<IActionResult> GetAll(int pageSize = 10, int pageNumber = 2)
+    public async Task<IActionResult> GetAll([FromQuery] PaginationDTO paginationDTO)
     {
-        return Ok(_userService.GetAll(pageSize, pageNumber).Result);
+        return Ok(_userService.GetAll(paginationDTO.PageSize, paginationDTO.PageNumber).Result);
     }
 
     [HttpGet("{id}")]

@@ -1,0 +1,34 @@
+<h2>Lista de Empleados</h2>
+
+<div *ngIf="employees.length > 0">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Id</th>
+                <th>Nombre de Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Número de Teléfono</th>
+              </tr>
+        </thead>
+        <tbody>
+    
+            <tr *ngFor="let employee of employees; let i = index">
+              <td scope="row">{{i + 1}}</td>
+              <td>{{employee.id}}</td>
+              <td>{{employee.userName}}</td>
+              <td>{{employee.firstName}}</td>
+              <td>{{employee.lastName}}</td>
+              <td>{{employee.email}}</td>
+              <td>{{employee.phoneNumber}}</td>
+            </tr>
+            
+          </tbody>
+    </table>
+</div>
+
+<div *ngIf="employees.length <= 0">
+    <h1>No hay empleados para mostrar</h1>
+</div>
