@@ -74,10 +74,8 @@ namespace back.Services
             }
 
             var profile = _mapper.Map<UserProfile>(profileDto);
-           
-           
-            var result = await _appDbContext.Profiles.AddAsync(profile);
 
+            var result = await _appDbContext.Profiles.AddAsync(profile);
 
             if (result.State == EntityState.Added)
             {
