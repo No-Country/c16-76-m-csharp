@@ -22,8 +22,10 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
 builder.Services.AddTransient<IValidator<UserRequestDTO>, RegisterUserDTOValidator>();
+builder.Services.AddTransient<IValidator<ProfileRequestDTO>, ProfileRequestDTOValidator>();
 
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
