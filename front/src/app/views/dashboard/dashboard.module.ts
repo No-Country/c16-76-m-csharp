@@ -14,7 +14,8 @@ import {
   ProgressModule,
   TableModule,
   TabsModule,
-  UtilitiesModule 
+  ModalModule,
+  UtilitiesModule,
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { ChartjsModule } from '@coreui/angular-chartjs';
@@ -46,12 +47,10 @@ import { EmployeesListComponent } from '../employees/employees-list/employees-li
     ChartjsModule,
     AvatarModule,
     TableModule,
+    ModalModule,
     UtilitiesModule,
     WidgetsModule,
   ],
-  declarations: [
-    DashboardComponent,
-    EmployeesListComponent,
-  ],
+  declarations: [DashboardComponent, EmployeesListComponent],
 })
 export class DashboardModule {}
