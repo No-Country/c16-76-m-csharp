@@ -19,7 +19,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Empleados',
-    url: '/theme/employees',
+    url: '/empleados',
     linkProps: { fragment: 'someAnchor' },
     iconComponent: { name: 'cil-speedometer' }
   },

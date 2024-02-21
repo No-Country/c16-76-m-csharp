@@ -1,0 +1,24 @@
+<table cTable>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id</th>
+            <th scope="col">User Name</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let employee of employees; let i = index">
+            <td scope="row">{{i + 1}}</td>
+            <th scope="row">{{employee.id}}</th>
+            <th scope="row">{{employee.userName}}</th>
+            <th scope="row">{{employee.firstName}}</th>
+            <th scope="row">{{employee.lastName}}</th>
+            <th scope="row">{{employee.email}}</th>
+            <th scope="row">{{employee.phoneNumber}}</th>
+        </tr>
+    </tbody>
+</table>

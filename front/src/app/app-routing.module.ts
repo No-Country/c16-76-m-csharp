@@ -8,6 +8,7 @@ import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import { SolicitudesComponent } from './views/solicitudes/solicitudes.component';
 import { AsistenciasComponent } from './views/asistencias/asistencias.component';
+import { EmployeesListComponent } from './views/employees/employees-list/employees-list.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
       },
       { path: 'solicitudes', component: SolicitudesComponent },
       { path: 'asistencias', component: AsistenciasComponent },
-
+      { path: 'empleados', component: EmployeesListComponent },
       {
         path: 'base',
         loadChildren: () =>

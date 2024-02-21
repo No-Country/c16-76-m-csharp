@@ -9,7 +9,6 @@ import { Page404Component } from './page404/page404.component';
 import { Page500Component } from './page500/page500.component';
 import { ButtonModule, CardModule, FormModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
-import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 
 
 @NgModule({
@@ -18,7 +17,6 @@ import { EmployeeListComponent } from './employees/employee-list/employee-list.c
     RegisterComponent,
     Page404Component,
     Page500Component,
-    EmployeeListComponent
   ],
   imports: [
     CommonModule,
