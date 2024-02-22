@@ -8,7 +8,7 @@ import {
   ButtonModule,
   FormModule,
 } from '@coreui/angular';
-import { format } from '@formkit/tempo';
+
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -49,7 +49,11 @@ export class DashBoardEmployesComponent implements OnInit {
       // Actualizar la hora cada segundo
       this.timerInterval = setInterval(() => {
         const now = new Date();
-        this.currentTime = this.formatTime(now, 'es');
+        this.currentTime = this.formatTime(
+          now.getHours(),
+          now.getMinutes(),
+          now.getSeconds()
+        );
         this.isActivityStarted = true;
       }, 1000);
     } else {
@@ -69,7 +73,15 @@ export class DashBoardEmployesComponent implements OnInit {
     this.isSpinnerVisible = false; // Ocultar el spinner al finalizar el temporizador
   }
 
-  private formatTime(date: Date, lang: string): string {
-    return format(date, 'h:mm:ss a', lang);
+  // Función para formatear la hora en HH:mm:ss
+  private formatTime(hours: number, minutes: number, seconds: number): string {
+    return `${this.padZero(hours)}:${this.padZero(minutes)}:${this.padZero(
+      seconds
+    )}`;
+  }
+
+  // Función para añadir cero delante de un número si es necesario
+  private padZero(num: number): string {
+    return num < 10 ? '0' + num : num.toString();
   }
 }
