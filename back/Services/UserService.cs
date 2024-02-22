@@ -1,5 +1,6 @@
 using AutoMapper;
 using back.DTOs;
+using back.Entities;
 using back.Entities.User;
 using back.Enums;
 using back.Interfaces;
@@ -82,6 +83,7 @@ class UserService : IUserService
         }
 
         var user = _mapper.Map<AppUser>(dto);
+        user.Profile = new UserProfile();
 
         var userWithTheSameEmail = await _userManager.FindByEmailAsync(dto.Email);
         if (userWithTheSameEmail != null)

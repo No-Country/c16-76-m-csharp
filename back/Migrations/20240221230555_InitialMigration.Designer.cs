@@ -12,8 +12,8 @@ using back.Persistence;
 namespace back.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240219231957_remainingEntities2")]
-    partial class remainingEntities2
+    [Migration("20240221230555_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,7 @@ namespace back.Migrations
             modelBuilder.Entity("back.Entities.Permission", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -61,6 +62,7 @@ namespace back.Migrations
             modelBuilder.Entity("back.Entities.PermissionType", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -172,6 +174,7 @@ namespace back.Migrations
             modelBuilder.Entity("back.Entities.UserProfile", b =>
                 {
                     b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Absences")
@@ -349,15 +352,15 @@ namespace back.Migrations
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("back.Entities.UserProfile", b =>
+            modelBuilder.Entity("back.Entities.User.AppUser", b =>
                 {
-                    b.HasOne("back.Entities.User.AppUser", "AppUser")
-                        .WithOne("Profile")
-                        .HasForeignKey("back.Entities.UserProfile", "Id")
+                    b.HasOne("back.Entities.UserProfile", "Profile")
+                        .WithOne("AppUser")
+                        .HasForeignKey("back.Entities.User.AppUser", "Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -411,14 +414,11 @@ namespace back.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("back.Entities.User.AppUser", b =>
-                {
-                    b.Navigation("Profile")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("back.Entities.UserProfile", b =>
                 {
+                    b.Navigation("AppUser")
+                        .IsRequired();
+
                     b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618

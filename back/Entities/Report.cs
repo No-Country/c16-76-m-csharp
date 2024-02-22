@@ -1,6 +1,8 @@
-﻿namespace back.Entities
+﻿using back.Entities.Common;
+
+namespace back.Entities
 {
-    public class Report
+    public class Report: BaseEntity
     {
         public DateTime Date { get; set; }
         public int Performance { get; set; }
