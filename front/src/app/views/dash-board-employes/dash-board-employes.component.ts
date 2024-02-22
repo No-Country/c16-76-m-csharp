@@ -9,7 +9,7 @@ import {
   FormModule,
 } from '@coreui/angular';
 import { format } from '@formkit/tempo';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dash-board-employes',
@@ -34,6 +34,7 @@ export class DashBoardEmployesComponent implements OnInit {
   timerInterval: any; // Variable para almacenar el intervalo de tiempo
   isTimerFinished: boolean = false; // Variable para controlar si el temporizador ha finalizado
   isActivityStarted: boolean = false; // Variable para controlar si la actividad ha comenzado
+  isSpinnerVisible: boolean = false;
 
   constructor() {}
 
@@ -44,6 +45,7 @@ export class DashBoardEmployesComponent implements OnInit {
       this.startTime = new Date();
       this.isRunning = true;
       this.isTimerFinished = false; // Restablecer la variable cuando se inicia el temporizador
+      this.isSpinnerVisible = true; // Mostrar el spinner al iniciar el temporizador
       // Actualizar la hora cada segundo
       this.timerInterval = setInterval(() => {
         const now = new Date();
@@ -54,6 +56,7 @@ export class DashBoardEmployesComponent implements OnInit {
       // Pausar el temporizador
       clearInterval(this.timerInterval); // Limpiar el intervalo de tiempo
       this.isRunning = false;
+      this.isSpinnerVisible = false; // Ocultar el spinner al pausar el temporizador
     }
   }
 
@@ -63,6 +66,7 @@ export class DashBoardEmployesComponent implements OnInit {
     this.isRunning = false;
     this.startTime = null;
     this.isTimerFinished = true; // Establecer la variable en true cuando el temporizador finaliza
+    this.isSpinnerVisible = false; // Ocultar el spinner al finalizar el temporizador
   }
 
   private formatTime(date: Date, lang: string): string {

@@ -24,7 +24,12 @@
         <div *ngIf="isActivityStarted">
           <h3><c-badge color="success">Iniciaste tu actividad</c-badge></h3>
           <div class="d-flex align-items-center justify-content-center gap-2">
-            <c-spinner color="success" size="sm" variant="grow"></c-spinner>
+            <c-spinner
+              *ngIf="isSpinnerVisible"
+              color="success"
+              size="sm"
+              variant="grow"
+            ></c-spinner>
             <h3>{{ currentTime }}</h3>
           </div>
         </div>
