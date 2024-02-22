@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Repositories\**" />
+    <Content Remove="Repositories\**" />
+    <EmbeddedResource Remove="Repositories\**" />
+    <None Remove="Repositories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
 
     <!-- Swagger -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
@@ -42,7 +49,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Migrations\" />
     <Folder Include="Utilities\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

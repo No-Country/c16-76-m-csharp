@@ -1,4 +1,5 @@
 using AutoMapper;
+using back.DTOs;
 using back.Entities;
 using back.Enums;
 using back.Interfaces;
@@ -49,16 +50,17 @@ class ActivityStatusService : IActivityStatusService
         return new BaseResponse<List<AssignmentDto>>(assignmentDtos) { };
     }
 
-    public async Task<BaseResponse<Assignment>> GetById(string id)
+    public async Task<BaseResponse<AssignmentDto>> GetById(string id)
     {
         var assignament = await _appDbContext.Assignments.FindAsync(id);
+        var dto = _mapper.Map<AssignmentDto>(assignament);
 
         if (assignament is null)
         {
-            return new BaseResponse<Assignment>($"There are not records with id: {id}") { };
+            return new BaseResponse<AssignmentDto>($"There are not records with id: {id}") { };
         }
 
-        return new BaseResponse<Assignment>(assignament) { };
+        return new BaseResponse<AssignmentDto>(dto) { };
     }
 
     public async Task<BaseResponse<Assignment>> GetByName(string name)
@@ -130,7 +132,8 @@ class ActivityStatusService : IActivityStatusService
         if (string.IsNullOrEmpty(id))
             return new BaseResponse<string>($"The id is required") { };
 
-        var currentAssignament = GetById(id).Result;
+        // var currentAssignament = GetById(id).Result;
+        var currentAssignament = await _appDbContext.Assignments.FindAsync(id);
 
         if (currentAssignament is null)
             return new BaseResponse<string>($"There are not records with id: {id}") { };
@@ -143,19 +146,34 @@ class ActivityStatusService : IActivityStatusService
         // }
 
         // currentAssignament.Data.ProfileEmail = dto.ProfileEmail;
-        currentAssignament.Data.Name = dto.Name;
-        currentAssignament.Data.Description = dto.Description;
-        currentAssignament.Data.StartDate = dto.StartDate;
-        currentAssignament.Data.EndDate = dto.EndDate;
-        currentAssignament.Data.Status = dto.Status;
+        currentAssignament.Name = dto.Name;
+        currentAssignament.Description = dto.Description;
+        // currentAssignament.StartDate = dto.StartDate;
+        currentAssignament.EndDate = dto.EndDate;
+        currentAssignament.Status = dto.Status;
 
         _appDbContext.Update(currentAssignament);
         await _appDbContext.SaveChangesAsync();
 
-        return new BaseResponse<string>($"The activity {currentAssignament.Data.Name} has been updated succesfully!");
+        return new BaseResponse<string>($"The activity {currentAssignament.Name} has been updated succesfully!");
     }
 
-    public async Task<BaseResponse<string>> Delete(string name)
+    public async Task<BaseResponse<string>> Delete(string id)
+    {
+        var assignment = await _appDbContext.Assignments.FindAsync(id); ;
+
+        if (assignment is null)
+            return new BaseResponse<string>($"There are not records with name: {id}") { };
+
+        assignment.IsDeleted = true;
+
+        _appDbContext.Update(assignment);
+        await _appDbContext.SaveChangesAsync();
+
+        return new BaseResponse<string>($"The activity '{id}' has been deleted succesfully!");
+    }
+    
+    public async Task<BaseResponse<string>> DeleteByName(string name)
     {
         var assignment = GetByName(name).Result;
 

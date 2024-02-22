@@ -49,13 +49,24 @@ public class ActivityStatusController : ControllerBase
         return Ok(assignment);
     }
 
-    [HttpDelete("{name}")]
-    public async Task<IActionResult> Delete(string name)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(string id)
     {
-        if (string.IsNullOrEmpty(name)) return BadRequest("Name was not provided");
+        if (string.IsNullOrEmpty(id)) return BadRequest("Id was not provided");
 
-        var assignment = _activityStatusService.Delete(name).Result;
+        var assignment = _activityStatusService.Delete(id).Result;
 
         return Ok(assignment);
     }
+
+    //[HttpDelete("/byName/{name}")]
+    //public async Task<IActionResult> DeleteByName(string name)
+    //{
+    //    if (string.IsNullOrEmpty(name)) return BadRequest("Name was not provided");
+
+    //    var assignment = _activityStatusService.DeleteByName(name).Result;
+
+    //    return Ok(assignment);
+    //}
+    
 }
