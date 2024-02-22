@@ -9,6 +9,7 @@ using FluentValidation;
 using back.DTOs;
 using back.Validations;
 using System.Text.Json.Serialization;
+using back.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +23,11 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
 builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
+builder.Services.AddTransient<IActivityStatusService, ActivityStatusService>();
+builder.Services.AddTransient<IValidator<AssignmentDto>, AssignmentDtoValidator>();
 builder.Services.AddTransient<IValidator<UserRequestDTO>, RegisterUserDTOValidator>();
 
-builder.Services.AddDbContext<AppDbContext>(options => 
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
