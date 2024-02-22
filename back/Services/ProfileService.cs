@@ -9,6 +9,7 @@ using back.Utilities.Base;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace back.Services
 {
@@ -77,13 +78,17 @@ namespace back.Services
 
             var result = await _appDbContext.Profiles.AddAsync(profile);
 
-            if (result.State == EntityState.Added)
+            try
             {
                 await _appDbContext.SaveChangesAsync();
 
-                return new BaseResponse<string>("The employee profile has been created succesfully!");
-            }
-            else
+                return new BaseResponse<string>("The employee profile has been created succesfully!")
+                {
+                    IsSuccess = true,
+                };
+             }
+            
+            catch (Exception ex)
             {
                 return new BaseResponse<string>("Something went wrong, the profile could not be created");
                
