@@ -35,6 +35,7 @@
     "@coreui/icons": "^3.0.1",
     "@coreui/icons-angular": "~4.7.14",
     "@coreui/utils": "^2.0.2",
+    "@formkit/tempo": "^0.0.10",
     "chart.js": "^3.9.1",
     "lodash-es": "^4.17.21",
     "ngx-scrollbar": "^13.0.3",
