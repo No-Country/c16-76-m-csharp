@@ -129,7 +129,7 @@ namespace back.Services
                 }
                 else
                 {
-                    return new BaseResponse<string>("Something went wrong, the user could not be updated");
+                    return new BaseResponse<string>("Something went wrong, this profile could not be updated");
                 
                 }
 

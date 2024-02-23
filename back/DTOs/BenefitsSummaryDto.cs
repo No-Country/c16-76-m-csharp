@@ -1,9 +1,10 @@
-﻿using back.Entities.Common;
+﻿using back.Entities;
 
-namespace back.Entities
+namespace back.DTOs
 {
-    public class BenefitsSummary : BaseEntity
+    public class BenefitsSummaryDto
     {
+        public string Id { get; set; }
         public bool IncludesBonusA { get; set; }
         public double BonusA { get; set; }
         public bool IncludesBonusB { get; set; }
