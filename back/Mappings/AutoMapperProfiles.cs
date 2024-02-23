@@ -11,6 +11,7 @@ namespace back.Mappings
         {
             CreateMap<AppUser, UserDto>();
             CreateMap<UserRequestDTO, AppUser>();
+            CreateMap<AssignmentDto, Assignment>().ReverseMap();
             CreateMap<UserProfile, ProfileDto>(); 
             CreateMap<ProfileRequestDTO, UserProfile>();
         }
