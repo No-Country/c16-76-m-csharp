@@ -2,16 +2,14 @@ import { Component } from '@angular/core';
 import { EmployeesService } from '../employees.service';
 import { user } from '../interfaces/user';
 
-
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
-  styleUrl: './employees-list.component.scss'
+  styleUrls: ['./employees-list.component.scss']
 })
 export class EmployeesListComponent {
   constructor(private employeesService: EmployeesService) { }
   
-  // employees: user[] = []
   employees: user[] = 
     [
         {
@@ -177,14 +175,24 @@ export class EmployeesListComponent {
     ]
     
   ngOnInit(): void {
-    this.getAll()
+    this.getAll();
   }
 
-  getAll(){
+  getAll() {
     this.employeesService.getAll()
-    .subscribe({
-      next: employees => {this.employees = employees},
-      error: error => {console.log(error)}
-    })
+      .subscribe({
+        next: employees => { this.employees = employees; },
+        error: error => { console.log(error); }
+      });
+  }
+
+  editEmployee(employee: user) {
+    // Aquí iría la lógica para editar un empleado
+    console.log('Editando empleado:', employee);
+  }
+
+  deleteEmployee(employee: user) {
+    // Aquí iría la lógica para eliminar un empleado
+    console.log('Eliminando empleado:', employee);
   }
 }
