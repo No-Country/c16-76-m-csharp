@@ -4,12 +4,12 @@ export const navItems: INavData[] = [
   {
     name: 'Panel de Empleados',
     url: '/panel',
-    iconComponent: { name: 'cil-speedometer' },
+    iconComponent: { name: 'cil-home' },
   },
   {
     name: 'Solicitudes',
     url: '/solicitudes',
-    iconComponent: { name: 'cil-drop' },
+    iconComponent: { name: 'cil-notes' },
   },
   {
     name: 'Asistencia',
@@ -21,6 +21,6 @@ export const navItems: INavData[] = [
     name: 'Empleados',
     url: '/empleados',
     linkProps: { fragment: 'someAnchor' },
-    iconComponent: { name: 'cil-speedometer' }
+    iconComponent: { name: 'cil-people' },
   },
 ];
