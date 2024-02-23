@@ -1,0 +1,86 @@
+<c-row class="text-center">
+  <c-col [sm]="6" class="d-flex flex-grow-1">
+    <c-card class="mb-4 align-items-center">
+      <c-avatar
+        src="assets/img/avatars/i.jpg"
+        status="success"
+        size="xl"
+        class="mt-4"
+      ></c-avatar>
+
+      <c-card-body>
+        <h5 cCardTitle>Gerson</h5>
+        <p cCardText>
+          Muchas gracias por tu esfuerzo y dedicación. Estamos encantados de
+          tenerte en nuestro equipo.
+        </p>
+      </c-card-body>
+    </c-card>
+  </c-col>
+  <c-col [sm]="6">
+    <c-card class="mb-4">
+      <c-card-body>
+        <h2 cCardTitle>Asistencia</h2>
+        <div *ngIf="isActivityStarted">
+          <h3><c-badge color="success">Iniciaste tu actividad</c-badge></h3>
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <c-spinner
+              *ngIf="isSpinnerVisible"
+              color="success"
+              size="sm"
+              variant="grow"
+            ></c-spinner>
+            <h3>{{ currentTime }}</h3>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center gap-4">
+          <button
+            cButton
+            [color]="isRunning ? 'warning' : 'success'"
+            variant="outline"
+            class="w-25"
+            (click)="startTimer()"
+            [disabled]="isTimerFinished"
+          >
+            {{ isRunning ? "Pausar" : "Iniciar" }}
+          </button>
+          <button
+            cButton
+            color="danger"
+            variant="outline"
+            class="w-25"
+            (click)="finishTimer()"
+            [disabled]="isTimerFinished"
+          >
+            Finalizar
+          </button>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+<c-row>
+  <c-col>
+    <form cForm class="d-flex flex-column">
+      <div class="mb-3">
+        <label for="formGroupExampleInput" class="form-label fw-bold"
+          >¿Qué hiciste ayer?</label
+        >
+        <input type="text" class="form-control" id="formGroupExampleInput" />
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label fw-bold"
+          >¿Qué harás hoy?</label
+        >
+        <input type="text" class="form-control" id="formGroupExampleInput2" />
+      </div>
+      <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label fw-bold"
+          >¿Qué harás mañana?</label
+        >
+        <input type="text" class="form-control" id="formGroupExampleInput2" />
+      </div>
+      <input cButton color="primary" type="submit" class="align-self-center" />
+    </form>
+  </c-col>
+</c-row>

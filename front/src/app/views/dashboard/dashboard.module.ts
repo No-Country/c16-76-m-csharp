@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import {
@@ -12,7 +13,9 @@ import {
   NavModule,
   ProgressModule,
   TableModule,
-  TabsModule
+  TabsModule,
+  ModalModule,
+  UtilitiesModule,
 } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { ChartjsModule } from '@coreui/angular-chartjs';
@@ -21,9 +24,13 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 
 import { WidgetsModule } from '../widgets/widgets.module';
+import { DashBoardEmployesComponent } from '../dash-board-employes/dash-board-employes.component';
+import { EmployeesListComponent } from '../employees/employees-list/employees-list.component';
 
 @NgModule({
   imports: [
+    HttpClientModule,
+    DashBoardEmployesComponent,
     DashboardRoutingModule,
     CardModule,
     NavModule,
@@ -40,9 +47,10 @@ import { WidgetsModule } from '../widgets/widgets.module';
     ChartjsModule,
     AvatarModule,
     TableModule,
-    WidgetsModule
+    ModalModule,
+    UtilitiesModule,
+    WidgetsModule,
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent, EmployeesListComponent],
 })
-export class DashboardModule {
-}
+export class DashboardModule {}

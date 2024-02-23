@@ -8,14 +8,13 @@ const routes: Routes = [
     path: '',
     component: DashboardComponent,
     data: {
-      title: $localize`Dashboard`
-    }
-  }
+      title: $localize`Panel de Empleado`,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class DashboardRoutingModule {
-}
+export class DashboardRoutingModule {}

@@ -33,10 +33,12 @@ import {
   SharedModule,
   SidebarModule,
   TabsModule,
-  UtilitiesModule
+  UtilitiesModule,
+
 } from '@coreui/angular';
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { DashboardModule } from './views/dashboard/dashboard.module';
 
 const APP_CONTAINERS = [
   DefaultFooterComponent,
@@ -72,7 +74,8 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    NgScrollbarModule
+    NgScrollbarModule,
+    DashboardModule
   ],
   providers: [
     {
