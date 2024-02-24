@@ -9,7 +9,6 @@ namespace back.Validations
         {
             RuleFor(x => x.IncludesBonusA)
                 .NotNull()
-                .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
 
             RuleFor(p => p.BonusA)
@@ -19,7 +18,6 @@ namespace back.Validations
 
             RuleFor(p => p.IncludesBonusB)
                 .NotNull()
-                .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
 
             RuleFor(x => x.BonusB)
@@ -29,7 +27,6 @@ namespace back.Validations
 
             RuleFor(p => p.IncludesBonusC)
                 .NotNull()
-                .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
 
             RuleFor(p => p.BonusC)
@@ -39,12 +36,10 @@ namespace back.Validations
 
             RuleFor(p => p.Holidays)
                 .NotNull()
-                .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
 
             RuleFor(p => p.HasHealthCare)
                 .NotNull()
-                .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
 
         }

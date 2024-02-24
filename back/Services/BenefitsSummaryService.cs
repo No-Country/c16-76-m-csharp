@@ -164,7 +164,7 @@ namespace back.Services
         public async Task<BaseResponse<string>> DeleteBenefitsSummary(string id)
         {
 
-            var benefitsSummary = await _appDbContext.Profiles.FindAsync(id);
+            var benefitsSummary = await _appDbContext.BenefitsSummaries.FindAsync(id);
 
             if (benefitsSummary == null)
             {
@@ -172,7 +172,7 @@ namespace back.Services
             }
 
             benefitsSummary.IsDeleted = true;
-            var result = _appDbContext.Profiles.Update(benefitsSummary);
+            var result = _appDbContext.BenefitsSummaries.Update(benefitsSummary);
 
 
             if (result.State == EntityState.Modified)
