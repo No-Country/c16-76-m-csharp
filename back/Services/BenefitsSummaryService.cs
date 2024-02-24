@@ -74,16 +74,23 @@ namespace back.Services
                 };
             }
 
-            var userProfile = await _appDbContext.Profiles.FindAsync(benefitsSummaryDto.ProfileId);
+            //var userProfile = await _appDbContext.Profiles.FindAsync(benefitsSummaryDto.ProfileId);
 
-            if (userProfile == null)
-            {
-                return new BaseResponse<string>("User profile with the provided Profile Id was not found");
-            }
+            //if (userProfile == null)
+            //{
+            //    return new BaseResponse<string>("User profile with the provided Profile Id was not found");
+            //}
 
             var benefitsSummary = _mapper.Map<BenefitsSummary>(benefitsSummaryDto);
 
-            benefitsSummary.Profile = userProfile;
+            // benefitsSummary.Profile = userProfile;
+
+            //var profile = new UserProfile();
+            //profile.Assist = benefitsSummaryDto.Assist;
+            //profile.Absences = benefitsSummaryDto.Absences;
+            //profile.Delays = benefitsSummaryDto.Delays;
+
+            //benefitsSummary.Profile = profile;
 
             var result = await _appDbContext.BenefitsSummaries.AddAsync(benefitsSummary);
 

@@ -17,11 +17,11 @@ namespace back.Persistence.Configuration
 
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.Profile)
-                .WithOne(x => x.BenefitsSummary)
-                .HasForeignKey<UserProfile>(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(x => x.Profile)
+            //    .WithOne(x => x.BenefitsSummary)
+            //    .HasForeignKey<UserProfile>(x => x.Id)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
 
 
 

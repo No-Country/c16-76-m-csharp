@@ -18,7 +18,7 @@ namespace back.Entities
         public ICollection<Permission> Permissions { get; set; }
 
         //public string BenefitsSummaryId { get; set; }
-        public BenefitsSummary BenefitsSummary { get; set; }
+        // public BenefitsSummary BenefitsSummary { get; set; }
 
         //public ICollection<Report> Reports { get; set; }
     }

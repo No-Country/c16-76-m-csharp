@@ -19,11 +19,11 @@ namespace back.Persistence.Configuration
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.BenefitsSummary)
-                .WithOne(x => x.Profile)
-                .HasForeignKey<BenefitsSummary>(x => x.Id)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(x => x.BenefitsSummary)
+            //    .WithOne(x => x.Profile)
+            //    .HasForeignKey<BenefitsSummary>(x => x.Id)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

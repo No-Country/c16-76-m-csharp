@@ -10,6 +10,9 @@
         public double BonusC { get; set; }
         public int Holidays { get; set; }
         public bool HasHealthCare { get; set; }
-        public string ProfileId { get; set; }
+        // public string ProfileId { get; set; }
+        //public int Assist { get; set; }
+        //public int Absences { get; set; }
+        //public int Delays { get; set; }
     }
 }

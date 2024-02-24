@@ -12,6 +12,6 @@ namespace back.Entities
         public double BonusC { get; set; }
         public int Holidays { get; set; }
         public bool HasHealthCare { get; set; }
-        public UserProfile Profile { get; set; }
+        // public UserProfile Profile { get; set; }
     }
 }
