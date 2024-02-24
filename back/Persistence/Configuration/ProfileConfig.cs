@@ -18,6 +18,12 @@ namespace back.Persistence.Configuration
                 .HasForeignKey<AppUser>(x => x.Id)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            //builder.HasOne(x => x.BenefitsSummary)
+            //    .WithOne(x => x.Profile)
+            //    .HasForeignKey<BenefitsSummary>(x => x.Id)
+            //    .IsRequired()
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

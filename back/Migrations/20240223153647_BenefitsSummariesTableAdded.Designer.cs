@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using back.Persistence;
 
@@ -11,9 +12,10 @@ using back.Persistence;
 namespace back.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240223153647_BenefitsSummariesTableAdded")]
+    partial class BenefitsSummariesTableAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -436,6 +438,17 @@ namespace back.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("back.Entities.BenefitsSummary", b =>
+                {
+                    b.HasOne("back.Entities.UserProfile", "Profile")
+                        .WithOne("BenefitsSummary")
+                        .HasForeignKey("back.Entities.BenefitsSummary", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("back.Entities.Permission", b =>
                 {
                     b.HasOne("back.Entities.UserProfile", "Profile")
@@ -512,6 +525,9 @@ namespace back.Migrations
             modelBuilder.Entity("back.Entities.UserProfile", b =>
                 {
                     b.Navigation("AppUser")
+                        .IsRequired();
+
+                    b.Navigation("BenefitsSummary")
                         .IsRequired();
 
                     b.Navigation("Permissions");

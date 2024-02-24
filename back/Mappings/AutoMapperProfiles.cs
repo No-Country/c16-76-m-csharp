@@ -14,6 +14,8 @@ namespace back.Mappings
             CreateMap<AssignmentDto, Assignment>().ReverseMap();
             CreateMap<UserProfile, ProfileDto>(); 
             CreateMap<ProfileRequestDTO, UserProfile>();
+            CreateMap<BenefitsSummary, BenefitsSummaryDto>();
+            CreateMap<BenefitsSummaryRequestDTO, BenefitsSummary>();
         }
     }
 }
