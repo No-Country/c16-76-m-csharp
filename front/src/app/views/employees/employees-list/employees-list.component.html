@@ -39,7 +39,7 @@
         <button
           type="button"
           class="btn btn-edit"
-          (click)="editEmployee(employee)"
+          (click)="getById(employee.id)"
           [cModalToggle]="modalEditarUsuario.id"
           cButton
           id="{{ employee.id }}"
@@ -210,26 +210,29 @@
     ></button>
   </c-modal-header>
   <c-modal-body
-    ><form cForm class="row g-3">
+    ><form [formGroup]="form" cForm class="row g-3" >
+
+      <input hidden formControlName="id" type="text" />
+
       <c-col [md]="6">
         <label cLabel for="firstName">Nombre</label>
-        <input cFormControl id="firstName" type="text" />
+        <input cFormControl formControlName="firstName" id="firstName" type="text" />
       </c-col>
       <c-col [xs]="6">
         <label cLabel for="lastName">Apellidos</label>
-        <input cFormControl id="lastName" type="text" />
+        <input cFormControl formControlName="lastName" id="lastName" type="text" />
       </c-col>
       <c-col [md]="6">
         <label cLabel for="userName">Nombre de Usuario</label>
-        <input cFormControl id="userName" type="text" />
+        <input cFormControl formControlName="userName" id="userName" type="text" />
       </c-col>
       <c-col [xs]="6">
         <label cLabel for="email">Correo</label>
-        <input cFormControl id="email" type="email" />
+        <input cFormControl formControlName="email" id="email" type="email" />
       </c-col>
       <c-col [md]="6">
         <label cLabel for="phoneNumber">Telefono</label>
-        <input cFormControl id="phoneNumber" type="number" />
+        <input cFormControl formControlName="phoneNumber" id="phoneNumber" type="number" />
       </c-col>
     </form>
   </c-modal-body>
@@ -249,7 +252,7 @@
       class="text-white me-1"
       type="submit"
     >
-      Guardar Usuario
+      Actualizar Usuario
     </button>
   </c-modal-footer>
 </c-modal>
