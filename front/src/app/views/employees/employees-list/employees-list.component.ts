@@ -23,7 +23,6 @@ export class EmployeesListComponent {
   })
 
   employees: user[] = []
-  currentEmployee!: user;
 
   // employees: user[] = [
   //   {
@@ -227,11 +226,21 @@ export class EmployeesListComponent {
     });
   }
   
-  editEmployee(employee: user) {
+  edit(employee: user) {
     console.log('Editar empleado:', employee);
   }
-  deleteEmployee(employee: user) {
-    // Aquí iría la lógica para eliminar un empleado
-    console.log('Eliminando empleado:', employee);
+
+  delete() {
+    let email: string = this.form.get('email')?.value
+
+    this.employeesService.delete(email).subscribe({
+      next: () => {this.reloadCurrentPage()},
+      error: error => {console.log(error)}
+    })
   }
+
+  reloadCurrentPage(){
+    window.location.reload()
+  }
+
 }

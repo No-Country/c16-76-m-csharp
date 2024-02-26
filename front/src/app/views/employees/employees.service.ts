@@ -32,17 +32,11 @@ export class EmployeesService {
     return this.http.get<baseResponse>(`${this.apiURL}/${id}`).pipe(
       map(response => response.data)
     )
-
-    // const newUser: user = {
-    //   id: "1",
-    //   userName: "example",
-    //   firstName: "John",
-    //   lastName: "Doe",
-    //   email: "example@example.com",
-    //   phoneNumber: "123456789"
-    // }
-
-    // return of(newUser)
   }
 
+  public delete(email: string) {
+    return this.http.delete<baseResponse>(`${this.apiURL}/${email}`).pipe(
+      map(response => response.data)
+    )
+  }
 }

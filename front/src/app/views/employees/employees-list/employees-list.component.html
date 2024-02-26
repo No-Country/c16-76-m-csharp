@@ -64,7 +64,7 @@
         <button
           type="button"
           class="btn btn-delete"
-          (click)="deleteEmployee(employee)"
+          (click)="getById(employee.id)"
           [cModalToggle]="eliminarUsuario.id"
           cButton
         >
@@ -284,14 +284,17 @@
   ></c-modal-body>
 
   <c-modal-footer class="d-flex justify-content-evenly">
+
     <button
       [cModalToggle]="eliminarUsuario.id"
       cButton
       color="danger"
       class="text-white"
+      (click)="delete()"
     >
       Si, eliminar
     </button>
+
     <button
       [cModalToggle]="eliminarUsuario.id"
       cButton
