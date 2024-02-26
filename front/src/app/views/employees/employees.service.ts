@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { user } from './interfaces/user';
 import { baseResponse } from './interfaces/baseResponse';
+import { createUserDTO } from './interfaces/createUserDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class EmployeesService {
     return this.http.get<baseResponse>(`${this.apiURL}/${id}`).pipe(
       map(response => response.data)
     )
+  }
+
+  public create(user: createUserDTO) {
+    return this.http.post(this.apiURL, user)
   }
 
   public delete(email: string) {

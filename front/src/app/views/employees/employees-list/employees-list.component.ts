@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from '../employees.service';
 import { user } from '../interfaces/user';
+import { createUserDTO } from '../interfaces/createUserDTO';
 
 @Component({
   selector: 'app-employees-list',
@@ -190,7 +191,7 @@ export class EmployeesListComponent {
   ngOnInit(): void {
     this.getAll()
   }
-
+  // Get all users
   getAll() {
     this.employeesService.getAll().subscribe({
       next: (employees) => {
@@ -201,7 +202,7 @@ export class EmployeesListComponent {
       },
     });
   }
-
+  // Get an user by id
   getById(id: string) {
     this.employeesService.getById(id)
     .subscribe({
@@ -225,11 +226,27 @@ export class EmployeesListComponent {
       },
     });
   }
+
+  // Create an user
+  create(){
+
+    let newUser: createUserDTO = this.form.value
+    newUser.password = "123Pa$word"
+    newUser.confirmPassword = "123Pa$word"
+
+    this.employeesService.create(newUser)
+    .subscribe({
+      next: () => {this.reloadCurrentPage()},
+      error: error => console.log(error)
+    })
+  }
   
+  // Update an user
   edit(employee: user) {
     console.log('Editar empleado:', employee);
   }
 
+  // Delete an user
   delete() {
     let email: string = this.form.get('email')?.value
 
