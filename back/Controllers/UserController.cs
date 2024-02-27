@@ -58,4 +58,12 @@ public class UserController : ControllerBase
 
         return Ok(user);
     }
+
+    [HttpGet("amount")]
+    // public async Task<IActionResult> GetAll(int pageSize = 10, int pageNumber = 2)
+    public async Task<IActionResult> GetRecordsAmount()
+    {
+        var count = _userService.GetRecordsAmount().Result;
+        return Ok(count);
+    }
 }

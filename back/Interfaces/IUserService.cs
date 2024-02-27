@@ -11,4 +11,5 @@ public interface IUserService
     public Task<BaseResponse<UserDto>> GetById(string id);
     public Task<BaseResponse<string>> Update(string email, UserRequestDTO dto);
     public Task<BaseResponse<string>> Delete(string email);
+    public Task<BaseResponse<int>> GetRecordsAmount();
 }

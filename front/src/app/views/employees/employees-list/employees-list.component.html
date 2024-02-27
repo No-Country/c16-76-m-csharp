@@ -317,3 +317,36 @@
     </button>
   </c-modal-footer>
 </c-modal>
+
+<div>
+
+  <form [formGroup]="pageSizeform" (submit)="getPagination()" [gutter]="3" cForm cRow>
+    <c-col [md]="3">
+      <label cLabel for="validationServer01">Cantidad de Registros por Página</label>
+      
+      <input formControlName="pageSize" cFormControl type="number"/>
+      
+      <br>
+
+      <button cButton color="success" class="text-white me-1" type="submit">
+          Aplicar
+      </button>
+    </c-col>
+
+  </form>
+  
+  <br>
+  
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li 
+        *ngFor="let page of totalPagesArray; let i = index" 
+        class="page-item"><a 
+        class="page-link" 
+        (click)="getAll(i + 1)">
+        {{i + 1}}
+      </a></li>
+    </ul>
+  </nav>
+
+</div>
