@@ -35,8 +35,14 @@ export class EmployeesService {
     )
   }
 
+  public update(user: createUserDTO) {
+    return this.http.put(`${this.apiURL}/${user.originalEmail}`, user)
+    // return of("Ok");
+  }
+
   public create(user: createUserDTO) {
     return this.http.post(this.apiURL, user)
+    // return of("Ok");
   }
 
   public delete(email: string) {

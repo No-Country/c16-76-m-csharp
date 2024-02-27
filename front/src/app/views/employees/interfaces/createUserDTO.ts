@@ -1,5 +1,6 @@
 export interface createUserDTO {
     id: string
+    originalEmail: string
     userName: string
     firstName: string
     lastName: string

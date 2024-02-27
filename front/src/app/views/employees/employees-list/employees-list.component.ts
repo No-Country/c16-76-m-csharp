@@ -16,6 +16,7 @@ export class EmployeesListComponent {
 
   form: FormGroup = this.formBuilder.group({
     id: '',
+    originalEmail: '',
     userName: '',
     firstName: '',
     lastName: '',
@@ -208,6 +209,7 @@ export class EmployeesListComponent {
     .subscribe({
       next: (employee) => {
         this.form.get('id')?.setValue(employee.id)
+        this.form.get('originalEmail')?.setValue(employee.email)
         this.form.get('userName')?.setValue(employee.userName)
         this.form.get('firstName')?.setValue(employee.firstName)
         this.form.get('lastName')?.setValue(employee.lastName)
@@ -242,8 +244,17 @@ export class EmployeesListComponent {
   }
   
   // Update an user
-  edit(employee: user) {
-    console.log('Editar empleado:', employee);
+  edit(){
+
+    let userToEdit: createUserDTO = this.form.value
+    userToEdit.password = "123Pa$word"
+    userToEdit.confirmPassword = "123Pa$word"
+
+    this.employeesService.update(userToEdit)
+    .subscribe({
+      next: () => {this.reloadCurrentPage()},
+      error: error => console.log(error)
+    })
   }
 
   // Delete an user
