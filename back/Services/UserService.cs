@@ -184,4 +184,13 @@ class UserService : IUserService
             };
         }
     }
+
+    public async Task<BaseResponse<int>> GetRecordsAmount()
+    {
+        var count = await _appDbContext.AppUsers
+            .Where(x => x.IsDeleted == false)
+            .CountAsync();
+
+        return new BaseResponse<int>(count) { };
+    }
 }

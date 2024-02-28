@@ -39,7 +39,7 @@
         <button
           type="button"
           class="btn btn-edit"
-          (click)="editEmployee(employee)"
+          (click)="getById(employee.id)"
           [cModalToggle]="modalEditarUsuario.id"
           cButton
           id="{{ employee.id }}"
@@ -64,7 +64,7 @@
         <button
           type="button"
           class="btn btn-delete"
-          (click)="deleteEmployee(employee)"
+          (click)="getById(employee.id)"
           [cModalToggle]="eliminarUsuario.id"
           cButton
         >
@@ -99,11 +99,12 @@
       cButtonClose
     ></button>
   </c-modal-header>
-  <c-modal-body
-    ><form [gutter]="3" cForm cRow class="needs-validation" ngNativeValidate>
+  <c-modal-body>
+    <form [formGroup]="form" (submit)="create()" [gutter]="3" cForm cRow class="needs-validation" ngNativeValidate>
       <c-col [md]="6">
-        <label cLabel for="validationServer01">Primer Nombre</label>
+        <label cLabel for="validationServer01">Nombre</label>
         <input
+          formControlName="firstName"
           [valid]="false"
           cFormControl
           id="validationServer01"
@@ -117,6 +118,7 @@
       <c-col [md]="6">
         <label cLabel for="validationServer02">Apellido</label>
         <input
+          formControlName="lastName"
           [valid]="false"
           cFormControl
           id="validationServer02"
@@ -132,6 +134,7 @@
         <c-input-group class="has-validation">
           <span cInputGroupText id="inputGroupPrepend03">&#64;</span>
           <input
+            formControlName="userName"
             [valid]="false"
             aria-describedby="inputGroupPrepend03"
             cFormControl
@@ -147,6 +150,7 @@
       <c-col [md]="6">
         <label cLabel for="validationServer03">Correo</label>
         <input
+          formControlName="email"
           [valid]="false"
           cFormControl
           id="validationServer03"
@@ -160,6 +164,7 @@
       <c-col [md]="6">
         <label cLabel for="validationServer03">Telefono</label>
         <input
+          formControlName="phoneNumber"
           [valid]="false"
           cFormControl
           id="validationServer03"
@@ -170,6 +175,17 @@
           >Este campo es obligatorio</c-form-feedback
         >
       </c-col>
+
+      <button
+        
+        cButton
+        color="success"
+        class="text-white me-1"
+        type="submit"
+      >
+        Crear Usuario
+      </button>
+
     </form>
   </c-modal-body>
   <c-modal-footer>
@@ -181,15 +197,6 @@
       type="submit"
     >
       Cerrar
-    </button>
-    <button
-      [cModalToggle]="modalCrearUsuario.id"
-      cButton
-      color="success"
-      class="text-white me-1"
-      type="submit"
-    >
-      Crear Usuario
     </button>
   </c-modal-footer>
 </c-modal>
@@ -210,27 +217,43 @@
     ></button>
   </c-modal-header>
   <c-modal-body
-    ><form cForm class="row g-3">
+    ><form [formGroup]="form" (submit)="edit()" cForm class="row g-3" >
+
+      <input hidden formControlName="id" type="text" />
+      <input hidden formControlName="originalEmail" type="text" />
+
       <c-col [md]="6">
         <label cLabel for="firstName">Nombre</label>
-        <input cFormControl id="firstName" type="text" />
+        <input cFormControl formControlName="firstName" id="firstName" type="text" />
       </c-col>
       <c-col [xs]="6">
         <label cLabel for="lastName">Apellidos</label>
-        <input cFormControl id="lastName" type="text" />
+        <input cFormControl formControlName="lastName" id="lastName" type="text" />
       </c-col>
       <c-col [md]="6">
         <label cLabel for="userName">Nombre de Usuario</label>
-        <input cFormControl id="userName" type="text" />
+        <input cFormControl formControlName="userName" id="userName" type="text" />
       </c-col>
       <c-col [xs]="6">
         <label cLabel for="email">Correo</label>
-        <input cFormControl id="email" type="email" />
+        <input cFormControl formControlName="email" id="email" type="email" />
       </c-col>
       <c-col [md]="6">
         <label cLabel for="phoneNumber">Telefono</label>
-        <input cFormControl id="phoneNumber" type="number" />
+        <input cFormControl formControlName="phoneNumber" id="phoneNumber" type="number" />
       </c-col>
+
+      <button
+        
+        cButton
+        color="success"
+        class="text-white me-1"
+        type="submit"
+      >
+        Actualizar Usuario
+      </button>
+
+
     </form>
   </c-modal-body>
   <c-modal-footer>
@@ -242,15 +265,7 @@
     >
       Cerrar
     </button>
-    <button
-      [cModalToggle]="modalEditarUsuario.id"
-      cButton
-      color="success"
-      class="text-white me-1"
-      type="submit"
-    >
-      Guardar Usuario
-    </button>
+    
   </c-modal-footer>
 </c-modal>
 
@@ -281,14 +296,17 @@
   ></c-modal-body>
 
   <c-modal-footer class="d-flex justify-content-evenly">
+
     <button
       [cModalToggle]="eliminarUsuario.id"
       cButton
       color="danger"
       class="text-white"
+      (click)="delete()"
     >
       Si, eliminar
     </button>
+
     <button
       [cModalToggle]="eliminarUsuario.id"
       cButton
@@ -299,3 +317,36 @@
     </button>
   </c-modal-footer>
 </c-modal>
+
+<div>
+
+  <form [formGroup]="pageSizeform" (submit)="getPagination()" [gutter]="3" cForm cRow>
+    <c-col [md]="3">
+      <label cLabel for="validationServer01">Cantidad de Registros por Página</label>
+      
+      <input formControlName="pageSize" cFormControl type="number"/>
+      
+      <br>
+
+      <button cButton color="success" class="text-white me-1" type="submit">
+          Aplicar
+      </button>
+    </c-col>
+
+  </form>
+  
+  <br>
+  
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li 
+        *ngFor="let page of totalPagesArray; let i = index" 
+        class="page-item"><a 
+        class="page-link" 
+        (click)="getAll(i + 1)">
+        {{i + 1}}
+      </a></li>
+    </ul>
+  </nav>
+
+</div>
