@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using back.Persistence;
 
@@ -11,9 +12,10 @@ using back.Persistence;
 namespace back.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240228165405_reports")]
+    partial class reports
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,14 +116,7 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProfileId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProfileId")
-                        .IsUnique();
 
                     b.ToTable("BenefitsSummaries", (string)null);
                 });
@@ -154,11 +149,9 @@ namespace back.Migrations
 
                     b.Property<string>("ProfileId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
 
                     b.ToTable("Permissions", (string)null);
                 });
@@ -324,16 +317,8 @@ namespace back.Migrations
                     b.Property<int>("Absences")
                         .HasColumnType("int");
 
-                    b.Property<string>("AppUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Assist")
                         .HasColumnType("int");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -355,21 +340,7 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Municipality")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Salary")
-                        .HasColumnType("float");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId")
-                        .IsUnique();
 
                     b.ToTable("Profiles", (string)null);
                 });
@@ -507,37 +478,26 @@ namespace back.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("back.Entities.BenefitsSummary", b =>
-                {
-                    b.HasOne("back.Entities.UserProfile", "Profile")
-                        .WithOne("BenefitsSummary")
-                        .HasForeignKey("back.Entities.BenefitsSummary", "ProfileId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-                });
-
             modelBuilder.Entity("back.Entities.Permission", b =>
                 {
                     b.HasOne("back.Entities.UserProfile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Permissions")
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("back.Entities.UserProfile", b =>
+            modelBuilder.Entity("back.Entities.User.AppUser", b =>
                 {
-                    b.HasOne("back.Entities.User.AppUser", "AppUser")
-                        .WithOne("Profile")
-                        .HasForeignKey("back.Entities.UserProfile", "AppUserId")
+                    b.HasOne("back.Entities.UserProfile", "Profile")
+                        .WithOne("AppUser")
+                        .HasForeignKey("back.Entities.User.AppUser", "Id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -591,16 +551,12 @@ namespace back.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("back.Entities.User.AppUser", b =>
-                {
-                    b.Navigation("Profile")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("back.Entities.UserProfile", b =>
                 {
-                    b.Navigation("BenefitsSummary")
+                    b.Navigation("AppUser")
                         .IsRequired();
+
+                    b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618
         }
