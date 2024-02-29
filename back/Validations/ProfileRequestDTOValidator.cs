@@ -18,6 +18,22 @@ namespace back.Validations
             RuleFor(p => p.Assist)
                 .NotNull()
                 .WithMessage("The {PropertyName} field is required.");
+
+            RuleFor(x => x.Country)
+                .NotNull()
+                .WithMessage("The {PropertyName} field is required.");
+
+            RuleFor(p => p.State)
+                .NotNull()
+                .WithMessage("The {PropertyName} field is required.");
+
+            RuleFor(p => p.Municipality)
+                .NotNull()
+                .WithMessage("The {PropertyName} field is required.");
+
+            RuleFor(p => p.Salary)
+                .NotNull()
+                .WithMessage("The {PropertyName} field is required.");
         }
     }
 }

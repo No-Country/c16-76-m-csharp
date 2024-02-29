@@ -86,8 +86,10 @@ async Task SeedUsers()
     using var scope = app.Services.CreateScope();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
     await DefaultRoles.SeedAsync(userManager, roleManager);
     await DefaultAdminUser.SeedAsync(userManager, roleManager);
     await DefaultBasicUser.SeedAsync(userManager, roleManager);
+    await DefaultPermissionTypes.SeedAsync(context);
 }

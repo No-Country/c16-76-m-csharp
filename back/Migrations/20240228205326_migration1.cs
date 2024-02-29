@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace back.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class migration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +21,34 @@ namespace back.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,25 +91,6 @@ namespace back.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profiles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Assist = table.Column<int>(type: "int", nullable: false),
-                    Absences = table.Column<int>(type: "int", nullable: false),
-                    Delays = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profiles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -100,64 +109,6 @@ namespace back.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Profiles_Id",
-                        column: x => x.Id,
-                        principalTable: "Profiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permissions",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DaysAmount = table.Column<int>(type: "int", nullable: false),
-                    ProfileId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Permissions_Profiles_Id",
-                        column: x => x.Id,
-                        principalTable: "Profiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -245,6 +196,91 @@ namespace back.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Profiles",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Assist = table.Column<int>(type: "int", nullable: false),
+                    Absences = table.Column<int>(type: "int", nullable: false),
+                    Delays = table.Column<int>(type: "int", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Municipality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Salary = table.Column<double>(type: "float", nullable: false),
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Profiles_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BenefitsSummaries",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IncludesBonusA = table.Column<bool>(type: "bit", nullable: false),
+                    BonusA = table.Column<double>(type: "float", nullable: false),
+                    IncludesBonusB = table.Column<bool>(type: "bit", nullable: false),
+                    BonusB = table.Column<double>(type: "float", nullable: false),
+                    IncludesBonusC = table.Column<bool>(type: "bit", nullable: false),
+                    BonusC = table.Column<double>(type: "float", nullable: false),
+                    Holidays = table.Column<int>(type: "int", nullable: false),
+                    HasHealthCare = table.Column<bool>(type: "bit", nullable: false),
+                    ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BenefitsSummaries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BenefitsSummaries_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    DaysAmount = table.Column<int>(type: "int", nullable: false),
+                    ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Permissions_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -283,6 +319,23 @@ namespace back.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BenefitsSummaries_ProfileId",
+                table: "BenefitsSummaries",
+                column: "ProfileId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permissions_ProfileId",
+                table: "Permissions",
+                column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Profiles_AppUserId",
+                table: "Profiles",
+                column: "AppUserId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -306,6 +359,9 @@ namespace back.Migrations
                 name: "Assignments");
 
             migrationBuilder.DropTable(
+                name: "BenefitsSummaries");
+
+            migrationBuilder.DropTable(
                 name: "Permissions");
 
             migrationBuilder.DropTable(
@@ -315,10 +371,10 @@ namespace back.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Profiles");
 
             migrationBuilder.DropTable(
-                name: "Profiles");
+                name: "AspNetUsers");
         }
     }
 }

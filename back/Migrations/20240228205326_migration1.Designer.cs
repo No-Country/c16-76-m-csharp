@@ -12,8 +12,8 @@ using back.Persistence;
 namespace back.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240223153647_BenefitsSummariesTableAdded")]
-    partial class BenefitsSummariesTableAdded
+    [Migration("20240228205326_migration1")]
+    partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -116,7 +116,14 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId")
+                        .IsUnique();
 
                     b.ToTable("BenefitsSummaries", (string)null);
                 });
@@ -149,9 +156,11 @@ namespace back.Migrations
 
                     b.Property<string>("ProfileId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Permissions", (string)null);
                 });
@@ -277,8 +286,16 @@ namespace back.Migrations
                     b.Property<int>("Absences")
                         .HasColumnType("int");
 
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Assist")
                         .HasColumnType("int");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -300,7 +317,21 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Salary")
+                        .HasColumnType("float");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("Profiles", (string)null);
                 });
@@ -442,7 +473,7 @@ namespace back.Migrations
                 {
                     b.HasOne("back.Entities.UserProfile", "Profile")
                         .WithOne("BenefitsSummary")
-                        .HasForeignKey("back.Entities.BenefitsSummary", "Id")
+                        .HasForeignKey("back.Entities.BenefitsSummary", "ProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -452,23 +483,23 @@ namespace back.Migrations
             modelBuilder.Entity("back.Entities.Permission", b =>
                 {
                     b.HasOne("back.Entities.UserProfile", "Profile")
-                        .WithMany("Permissions")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany()
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("back.Entities.User.AppUser", b =>
+            modelBuilder.Entity("back.Entities.UserProfile", b =>
                 {
-                    b.HasOne("back.Entities.UserProfile", "Profile")
-                        .WithOne("AppUser")
-                        .HasForeignKey("back.Entities.User.AppUser", "Id")
+                    b.HasOne("back.Entities.User.AppUser", "AppUser")
+                        .WithOne("Profile")
+                        .HasForeignKey("back.Entities.UserProfile", "AppUserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Profile");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -522,15 +553,16 @@ namespace back.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("back.Entities.User.AppUser", b =>
+                {
+                    b.Navigation("Profile")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("back.Entities.UserProfile", b =>
                 {
-                    b.Navigation("AppUser")
-                        .IsRequired();
-
                     b.Navigation("BenefitsSummary")
                         .IsRequired();
-
-                    b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618
         }

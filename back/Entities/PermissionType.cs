@@ -6,5 +6,6 @@ namespace back.Entities
     {
         public string Name { get; set; }
         public int LimitDays { get; set; }
+        public ICollection<Permission> Permissions { get; set; }
     }
 }

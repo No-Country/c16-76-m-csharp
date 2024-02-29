@@ -9,7 +9,7 @@ namespace back.Entities
         public int AchivedGoals { get; set; }
         public double SavedMoney { get; set; }
 
-        //public string ProfileId { get; set; }
-        //public Profile Profile { get; set; }
+        public string ProfileId { get; set; }
+        public UserProfile Profile { get; set; }
     }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
 import { user } from './interfaces/user';
 import { baseResponse } from './interfaces/baseResponse';
-import { createUserDTO } from './interfaces/createUserDTO';
+import { UserRequestDTO } from './interfaces/createUserDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -199,12 +199,12 @@ export class EmployeesService {
     )
   }
 
-  public update(user: createUserDTO) {
+  public update(user: UserRequestDTO) {
     return this.http.put(`${this.apiURL}/${user.originalEmail}`, user)
     // return of("Ok");
   }
 
-  public create(user: createUserDTO) {
+  public create(user: UserRequestDTO) {
     return this.http.post(this.apiURL, user)
     // return of("Ok");
   }

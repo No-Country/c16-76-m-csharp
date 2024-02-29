@@ -37,6 +37,8 @@ namespace back.Services
                 .Where(p => p.IsDeleted == false)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
+                //.Include(x => x.AppUser)
+                //.Where(x => !x.AppUser.IsDeleted)
                 .ToListAsync();
 
         var profilesDto = _mapper.Map<List<ProfileDto>>(profiles);
@@ -47,7 +49,12 @@ namespace back.Services
         //Get Profile by Id
         public async Task<BaseResponse<ProfileDto>> GetProfileById(string id)
         {
-            var profile = await _appDbContext.Profiles.FindAsync(id);
+            var profile = await _appDbContext.Profiles
+                .Where(x => x.IsDeleted == false)
+                //.Include(x => x.AppUser)
+                //.Include(x => x.BenefitsSummary)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
             var profiledto = _mapper.Map<ProfileDto>(profile);
 
             var response = new BaseResponse<ProfileDto>();
@@ -115,11 +122,15 @@ namespace back.Services
                 return new BaseResponse<string>($"There are not records with id: {id}") { }; 
             }
 
-                profile.Assist = profileDto.Assist;
-                profile.Absences = profileDto.Absences;
-                profile.Delays = profileDto.Delays;
+            profile.Assist = profileDto.Assist;
+            profile.Absences = profileDto.Absences;
+            profile.Delays = profileDto.Delays;
+            profile.Country = profileDto.Country;
+            profile.State = profileDto.State;
+            profile.Municipality = profileDto.Municipality;
+            profile.Salary = profileDto.Salary;
 
-                var result = _appDbContext.Profiles.Update(profile);
+            var result = _appDbContext.Profiles.Update(profile);
             
 
                 if (result.State == EntityState.Modified)
