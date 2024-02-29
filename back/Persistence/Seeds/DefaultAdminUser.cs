@@ -15,6 +15,7 @@ namespace back.Persistence.Seeds
                 Email = "userAdmin@mail.com",
                 FirstName = "Admin",
                 LastName = "Admin",
+                PhoneNumber = "555-9074",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()

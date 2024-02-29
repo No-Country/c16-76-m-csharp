@@ -8,20 +8,8 @@ namespace back.Persistence.Seeds
     {
         public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            for (int i = 0; i < 35; i++)
+            foreach (var defaultUser in SeedUsersList.Users)
             {
-                // Seed Default Admin User
-                var defaultUser = new AppUser
-                {
-                    UserName = $"user{i}Basic",
-                    Email = $"userBasic{i}@mail.com",
-                    FirstName = $"Name{i}",
-                    LastName = $"LastName{i}",
-                    EmailConfirmed = true,
-                    PhoneNumberConfirmed = true,
-                    Profile = EntityRelationMethods.SeedProfile()
-                };
-
                 if (userManager.Users.All(u => u.Id != defaultUser.Id))
                 {
                     var user = await userManager.FindByEmailAsync(defaultUser.Email);

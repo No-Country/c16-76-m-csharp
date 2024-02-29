@@ -10,7 +10,7 @@ namespace back.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public Status Status { get; set; }
-        //public string ProfileId { get; set; }
-        //public Profile Profile { get; set; }
+        public string ProfileId { get; set; }
+        public UserProfile Profile { get; set; }
     }
 }

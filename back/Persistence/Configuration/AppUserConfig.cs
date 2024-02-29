@@ -12,7 +12,7 @@ namespace back.Persistence.Configuration
         {
             builder.HasOne(x => x.Profile)
                 .WithOne(x => x.AppUser)
-                .HasForeignKey<UserProfile>(x => x.Id)
+                .HasForeignKey<UserProfile>(x => x.AppUserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         }

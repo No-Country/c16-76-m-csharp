@@ -114,7 +114,14 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfileId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId")
+                        .IsUnique();
 
                     b.ToTable("BenefitsSummaries", (string)null);
                 });
@@ -147,9 +154,11 @@ namespace back.Migrations
 
                     b.Property<string>("ProfileId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Permissions", (string)null);
                 });
@@ -275,8 +284,16 @@ namespace back.Migrations
                     b.Property<int>("Absences")
                         .HasColumnType("int");
 
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Assist")
                         .HasColumnType("int");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -298,7 +315,21 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Municipality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Salary")
+                        .HasColumnType("float");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId")
+                        .IsUnique();
 
                     b.ToTable("Profiles", (string)null);
                 });
@@ -436,26 +467,37 @@ namespace back.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("back.Entities.Permission", b =>
+            modelBuilder.Entity("back.Entities.BenefitsSummary", b =>
                 {
                     b.HasOne("back.Entities.UserProfile", "Profile")
-                        .WithMany("Permissions")
-                        .HasForeignKey("Id")
+                        .WithOne("BenefitsSummary")
+                        .HasForeignKey("back.Entities.BenefitsSummary", "ProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Profile");
                 });
 
-            modelBuilder.Entity("back.Entities.User.AppUser", b =>
+            modelBuilder.Entity("back.Entities.Permission", b =>
                 {
                     b.HasOne("back.Entities.UserProfile", "Profile")
-                        .WithOne("AppUser")
-                        .HasForeignKey("back.Entities.User.AppUser", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany()
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Profile");
+                });
+
+            modelBuilder.Entity("back.Entities.UserProfile", b =>
+                {
+                    b.HasOne("back.Entities.User.AppUser", "AppUser")
+                        .WithOne("Profile")
+                        .HasForeignKey("back.Entities.UserProfile", "AppUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -509,12 +551,16 @@ namespace back.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("back.Entities.User.AppUser", b =>
+                {
+                    b.Navigation("Profile")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("back.Entities.UserProfile", b =>
                 {
-                    b.Navigation("AppUser")
+                    b.Navigation("BenefitsSummary")
                         .IsRequired();
-
-                    b.Navigation("Permissions");
                 });
 #pragma warning restore 612, 618
         }

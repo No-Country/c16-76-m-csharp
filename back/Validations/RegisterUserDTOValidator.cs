@@ -31,6 +31,11 @@ namespace back.Validations
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
+            
+            RuleFor(p => p.PhoneNumber)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("The {PropertyName} field is required.");
 
             RuleFor(p => p.Password)
                 .NotNull()

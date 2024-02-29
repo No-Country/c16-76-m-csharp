@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from '../employees.service';
 import { user } from '../interfaces/user';
-import { createUserDTO } from '../interfaces/createUserDTO';
+import { UserRequestDTO } from '../interfaces/createUserDTO';
 
 @Component({
   selector: 'app-employees-list',
@@ -70,7 +70,7 @@ export class EmployeesListComponent {
   // Create an user
   create(){
 
-    let newUser: createUserDTO = this.form.value
+    let newUser: UserRequestDTO = this.form.value
     newUser.password = "123Pa$word"
     newUser.confirmPassword = "123Pa$word"
 
@@ -84,7 +84,7 @@ export class EmployeesListComponent {
   // Update an user
   edit(){
 
-    let userToEdit: createUserDTO = this.form.value
+    let userToEdit: UserRequestDTO = this.form.value
     userToEdit.password = "123Pa$word"
     userToEdit.confirmPassword = "123Pa$word"
 
