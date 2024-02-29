@@ -16,6 +16,8 @@ namespace back.Mappings
             CreateMap<ProfileRequestDTO, UserProfile>();
             CreateMap<BenefitsSummary, BenefitsSummaryDto>();
             CreateMap<BenefitsSummaryRequestDTO, BenefitsSummary>();
+            CreateMap<ReportRequestDto, Report>();
+            CreateMap<Report, ReportDto>();
         }
     }
 }

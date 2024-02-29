@@ -33,12 +33,10 @@ namespace back.Validations
                 .GreaterThan(0)
                 .WithMessage("The {PropertyName} must be greater than 0");
 
-            RuleFor(x => x.ProfileEmail)
+            RuleFor(x => x.ProfileId)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("The {PropertyName} field is required.")
-                .EmailAddress()
-                .WithMessage("The {PropertyName} must be a valid email.");
+                .WithMessage("The {PropertyName} field is required.");
         }
     }
 }

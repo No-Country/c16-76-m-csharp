@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace back.Migrations
 {
-    public partial class migration1 : Migration
+    public partial class initialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,27 +49,6 @@ namespace back.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Assignments",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Assignments", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -227,6 +206,34 @@ namespace back.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Assignments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Assignments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Assignments_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BenefitsSummaries",
                 columns: table => new
                 {
@@ -264,6 +271,7 @@ namespace back.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DaysAmount = table.Column<int>(type: "int", nullable: false),
                     ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PermissionTypeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -274,11 +282,44 @@ namespace back.Migrations
                 {
                     table.PrimaryKey("PK_Permissions", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Permissions_PermissionTypes_PermissionTypeId",
+                        column: x => x.PermissionTypeId,
+                        principalTable: "PermissionTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Permissions_Profiles_ProfileId",
                         column: x => x.ProfileId,
                         principalTable: "Profiles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reports",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Performance = table.Column<int>(type: "int", nullable: false),
+                    AchivedGoals = table.Column<int>(type: "int", nullable: false),
+                    SavedMoney = table.Column<double>(type: "float", nullable: false),
+                    ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reports", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reports_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -321,10 +362,20 @@ namespace back.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Assignments_ProfileId",
+                table: "Assignments",
+                column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BenefitsSummaries_ProfileId",
                 table: "BenefitsSummaries",
                 column: "ProfileId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permissions_PermissionTypeId",
+                table: "Permissions",
+                column: "PermissionTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Permissions_ProfileId",
@@ -336,6 +387,11 @@ namespace back.Migrations
                 table: "Profiles",
                 column: "AppUserId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reports_ProfileId",
+                table: "Reports",
+                column: "ProfileId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -365,10 +421,13 @@ namespace back.Migrations
                 name: "Permissions");
 
             migrationBuilder.DropTable(
-                name: "PermissionTypes");
+                name: "Reports");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "PermissionTypes");
 
             migrationBuilder.DropTable(
                 name: "Profiles");

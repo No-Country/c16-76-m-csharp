@@ -35,23 +35,9 @@ namespace back.Services
                     Errors = validator.Errors.Select(x => x.ErrorMessage).ToList()
                 };
 
-            var currentProfile = await _appDbContext.AppUsers.Where(x => x.Email == dto.ProfileEmail).FirstOrDefaultAsync();
+            Report newReport = _mapper.Map<Report>(dto);
 
-            if (currentProfile is null)
-                return new BaseResponse<string>($"There are not records with email: {dto.ProfileEmail}") { };
-
-
-            Report reportMap = new()
-            {
-                // ProfileId = currentProfile.Profile.Id,
-                // Profile = currentProfile.Profile,
-                Date = dto.Date,
-                Performance = dto.Performance,
-                AchivedGoals = dto.AchivedGoals,
-                SavedMoney = dto.SavedMoney
-            };
-
-            _appDbContext.Add(reportMap);
+            _appDbContext.Add(newReport);
             await _appDbContext.SaveChangesAsync();
 
             return new BaseResponse<string>($"The report has been created succesfully!");
@@ -72,7 +58,7 @@ namespace back.Services
             return new BaseResponse<string>($"The report has been deleted succesfully!");
         }
 
-        public async Task<BaseResponse<List<Report>>> GetAll(int pageSize, int pageNumber)
+        public async Task<BaseResponse<List<ReportDto>>> GetAll(int pageSize, int pageNumber)
         {
 
             var reports = await _appDbContext.Reports
@@ -83,23 +69,22 @@ namespace back.Services
                 // .Include(p=>p.Profile)
                 .ToListAsync();
 
-            // var reportsMap = _mapper.Map<List<ReportDto>>(reports.ToList());
+            var reportsMap = _mapper.Map<List<ReportDto>>(reports.ToList());
 
-
-            return new BaseResponse<List<Report>>(reports) { };
+            return new BaseResponse<List<ReportDto>>(reportsMap) { };
         }
 
-        public async Task<BaseResponse<Report>> GetById(string id)
+        public async Task<BaseResponse<ReportDto>> GetById(string id)
         {
             var report = await _appDbContext.Reports.Where(x => x.Id == id && !x.IsDeleted).FirstOrDefaultAsync();
 
             if (report is null)
             {
-                return new BaseResponse<Report>($"There are not records with id: {id}") { };
+                return new BaseResponse<ReportDto>($"There are not records with id: {id}") { };
             }
 
-            // var dto = _mapper.Map<Report>(report);
-            return new BaseResponse<Report>(report) { };
+            var dto = _mapper.Map<ReportDto>(report);
+            return new BaseResponse<ReportDto>(dto) { };
         }
 
         public async Task<BaseResponse<string>> Update(string id, ReportRequestDto dto)
@@ -111,11 +96,6 @@ namespace back.Services
                 {
                     Errors = validator.Errors.Select(x => x.ErrorMessage).ToList()
                 };
-
-            var currentProfile = await _appDbContext.Profiles.Where(x => x.AppUser.Email == dto.ProfileEmail).FirstOrDefaultAsync();
-
-            if (currentProfile is null)
-                return new BaseResponse<string>($"The profile with email '{dto.ProfileEmail}' does not exist") { };
 
             if (string.IsNullOrEmpty(id))
                 return new BaseResponse<string>($"The id is required") { };
@@ -129,6 +109,7 @@ namespace back.Services
             report.Performance = dto.Performance;
             report.AchivedGoals = dto.AchivedGoals;
             report.SavedMoney = dto.SavedMoney;
+            report.ProfileId = dto.ProfileId;
 
             _appDbContext.Update(report);
             await _appDbContext.SaveChangesAsync();
