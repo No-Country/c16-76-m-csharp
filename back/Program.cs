@@ -21,16 +21,21 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
+// Services
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IActivityStatusService, ActivityStatusService>();
 builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddTransient<IBenefitsSummaryService, BenefitsSummaryService>();
+builder.Services.AddTransient<IReportService, ReportService>();
+
+// Validations
 builder.Services.AddTransient<IValidator<AssignmentDto>, AssignmentDtoValidator>();
 builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
 builder.Services.AddTransient<IValidator<UserRequestDTO>, RegisterUserDTOValidator>();
 builder.Services.AddTransient<IValidator<ProfileRequestDTO>, ProfileRequestDTOValidator>();
 builder.Services.AddTransient<IValidator<BenefitsSummaryRequestDTO>, BenefitsSummaryDTOValidator>();
+builder.Services.AddTransient<IValidator<ReportRequestDto>, ReportRequestDtoValidator>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
