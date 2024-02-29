@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalModule } from '@coreui/angular';
 
 @Component({
   selector: 'app-solicitudes',
