@@ -1,23 +1,89 @@
-<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="exampleInputEmail1"
-      aria-describedby="emailHelp"
-    />
-    <div id="emailHelp" class="form-text">
-      We'll never share your email with anyone else.
-    </div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" />
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<c-modal #fullScreen [fullscreen]="true" id="fullScreen">
+  <c-modal-header>
+    <h5 cModalTitle>Crear solicitud</h5>
+    <button [cModalToggle]="fullScreen.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form cForm class="row g-3">
+      <c-col [md]="6">
+        <label cLabel for="inputEmail4">Email</label>
+        <input cFormControl id="inputEmail4" type="email" />
+      </c-col>
+      <c-col [md]="6">
+        <label cLabel for="inputPassword4">Password</label>
+        <input cFormControl id="inputPassword4" type="password" />
+      </c-col>
+      <c-col [xs]="12">
+        <label cLabel for="inputAddress">Address</label>
+        <input cFormControl id="inputAddress" placeholder="1234 Main St" />
+      </c-col>
+      <c-col [xs]="12">
+        <label cLabel for="inputAddress2">Address 2</label>
+        <input cFormControl id="inputAddress2" placeholder="Apartment, studio, or floor" />
+      </c-col>
+      <c-col [md]="6">
+        <label cLabel for="inputCity">City</label>
+        <input cFormControl id="inputCity" />
+      </c-col>
+      <c-col [md]="4">
+        <label cLabel for="inputState">State</label>
+        <select cSelect id="inputState">
+          <option>Choose...</option>
+          <option>...</option>
+        </select>
+      </c-col>
+      <c-col [md]="2">
+        <label cLabel for="inputZip">Zip</label>
+        <input cFormControl id="inputZip" />
+      </c-col>
+      <c-col [xs]="12">
+        <c-form-check>
+          <input cFormCheckInput id="gridCheck" name="gridCheck" type="checkbox" />
+          <label cFormCheckLabel for="gridCheck">Check me out</label>
+        </c-form-check>
+      </c-col>
+      <c-col [xs]="12">
+        <button cButton type="submit">Sign in</button>
+      </c-col>
+    </form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton [cModalToggle]="fullScreen.id">Close</button>
+  </c-modal-footer>
+</c-modal>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">N°</th>
+      <th scope="col">Tipo Solicitud</th>
+      <th scope="col">Urgencia</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Vacaciones</td>
+      <td>Media</td>
+      <td><strong>Enviada</strong></td>
+      <td><button [cModalToggle]="fullScreen.id" cButton>Crear solicitud</button></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Día libre</td>
+      <td>Alta</td>
+      <td><strong>Enviada</strong></td>
+      <td><button [cModalToggle]="fullScreen.id" cButton>Crear solicitud</button></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Cita Médica</td>
+      <td>Baja</td>
+      <td><strong>Enviada</strong></td>
+      <td><button [cModalToggle]="fullScreen.id" cButton>Crear solicitud</button></td>
+    </tr>
+  </tbody>
+</table>
+

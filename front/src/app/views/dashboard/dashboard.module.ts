@@ -26,6 +26,7 @@ import { DashboardComponent } from './dashboard.component';
 import { WidgetsModule } from '../widgets/widgets.module';
 import { DashBoardEmployesComponent } from '../dash-board-employes/dash-board-employes.component';
 import { EmployeesListComponent } from '../employees/employees-list/employees-list.component';
+import { SolicitudesComponent } from '../solicitudes/solicitudes.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,6 @@ import { EmployeesListComponent } from '../employees/employees-list/employees-li
     UtilitiesModule,
     WidgetsModule,
   ],
-  declarations: [DashboardComponent, EmployeesListComponent],
+  declarations: [DashboardComponent, EmployeesListComponent, SolicitudesComponent],
 })
 export class DashboardModule {}
