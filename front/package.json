@@ -36,6 +36,7 @@
     "@coreui/icons-angular": "~4.7.14",
     "@coreui/utils": "^2.0.2",
     "@formkit/tempo": "^0.0.10",
+    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^3.9.1",
     "lodash-es": "^4.17.21",

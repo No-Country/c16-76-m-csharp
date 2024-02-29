@@ -1,23 +1,58 @@
-<form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="exampleInputEmail1"
-      aria-describedby="emailHelp"
-    />
-    <div id="emailHelp" class="form-text">
-      We'll never share your email with anyone else.
+<button
+    class="btn btn-success text-white mb-3 d-flex justify-content-end"
+    cButton
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal">
+    Crear solicitud
+</button>
+
+<div class="modal" id="exampleModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>       
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
     </div>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" />
-  </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</div>
+
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">N°</th>
+      <th scope="col">Tipo Solicitud</th>
+      <th scope="col">Urgencia</th>
+      <th scope="col">Estado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Vacaciones</td>
+      <td>Media</td>
+      <td><strong>Enviada</strong></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Día libre</td>
+      <td>Alta</td>
+      <td><strong>Enviada</strong></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Cita Médica</td>
+      <td>Baja</td>
+      <td><strong>Enviada</strong></td>
+    </tr>
+  </tbody>
+</table>
+
