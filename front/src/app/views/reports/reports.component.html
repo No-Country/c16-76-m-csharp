@@ -1,0 +1,7 @@
+<h4>Listado de Evaluaciones</h4>
+
+<br>
+
+<div *ngFor="let report of reports">
+    <a routerLink="/evaluaciones/ver/{{report.id}}" >Evaluación del {{report.date}}</a> 
+</div>

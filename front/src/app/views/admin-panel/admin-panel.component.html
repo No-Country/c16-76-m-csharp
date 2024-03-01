@@ -1,0 +1,45 @@
+<div>
+    <h4>Información General</h4>
+    <p>Nombre: {{profile.firstName}}</p>
+    <p>Apellido: {{profile.lastName}}</p>
+    <p>Nombre de Usuario: {{profile.userName}}</p>
+    <p>Email: {{profile.email}}</p>
+    <p>Número de Teléfono: {{profile.phoneNumber}}</p>
+</div>
+
+<hr>
+
+<button (click)="toggleProfileInfo()" style="background-color: lightblue;">Ver Perfil</button>
+<button (click)="toggleBenefitsInfo()" style="background-color: antiquewhite;">Ver Prestaciones</button>
+<button (click)="verActividades()" style="background-color: lightcoral;">Ver Actividades</button>
+<button (click)="verReportes()" style="background-color: lightcyan;">Ver Evaluaciones</button>
+<button (click)="verSolicitudes()" style="background-color: lightseagreen;">Ver Solicitudes</button>
+
+<div *ngIf="showProfileInfo">
+    <div>
+        <h4>Perfil</h4>
+        <p>Asistencias: {{profile.Assists}}</p>
+        <p>Faltas: {{profile.Absences}}</p>
+        <p>Retardos: {{profile.Delays}}</p>
+        <p>País: {{profile.Country}}</p>
+        <p>Estado: {{profile.State}}</p>
+        <p>Municipio: {{profile.Municipality}}</p>
+        <p>Sueldo (Mensual): {{profile.Salary | currency}}</p>
+        <p>Fecha de Ingreso: {{profile.admissionDate}}</p>
+    </div>
+</div>
+
+<div *ngIf="showBenefitsInfo">
+    <div>
+        <h4>Prestaciones</h4>
+        <p>IncludesBonusA: {{benefits.IncludesBonusA}}</p>
+        <p>BonusA: {{benefits.BonusA}}</p>
+        <p>IncludesBonusB: {{benefits.IncludesBonusB}}</p>
+        <p>BonusB: {{benefits.BonusB}}</p>
+        <p>IncludesBonusC: {{benefits.IncludesBonusC}}</p>
+        <p>BonusC: {{benefits.BonusC}}</p>
+        <p>Holidays: {{benefits.Holidays}}</p>
+        <p>HasHealthCare: {{benefits.HasHealthCare}}</p>
+        <p>ProfileId: {{benefits.ProfileId}}</p>
+    </div>
+</div>

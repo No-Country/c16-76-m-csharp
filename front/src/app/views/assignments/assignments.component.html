@@ -1,0 +1,15 @@
+<h4>Listado de Actividades</h4>
+
+<br>
+
+<div *ngFor="let assignment of assignments">
+
+    <span hidden>| {{assignment.id}} |</span>
+    <span>| {{assignment.name}} |</span>
+    <span hidden>| {{assignment.description}} |</span>
+    <span>| {{assignment.startDate}} |</span>
+    <span hidden>| {{assignment.endDate}} |</span>
+    <span>| {{assignment.status}} |</span>
+    <span hidden>| {{assignment.profileId}} |</span>
+        
+</div>

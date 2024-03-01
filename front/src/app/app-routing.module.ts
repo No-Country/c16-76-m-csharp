@@ -9,6 +9,11 @@ import { RegisterComponent } from './views/pages/register/register.component';
 import { SolicitudesComponent } from './views/solicitudes/solicitudes.component';
 import { AsistenciasComponent } from './views/asistencias/asistencias.component';
 import { EmployeesListComponent } from './views/employees/employees-list/employees-list.component';
+import { AdminPanelComponent } from './views/admin-panel/admin-panel.component';
+import { AssignmentsComponent } from './views/assignments/assignments.component';
+import { ReportsComponent } from './views/reports/reports.component';
+import { PermissionsComponent } from './views/permissions/permissions.component';
+import { ReportComponent } from './views/report/report.component';
 
 const routes: Routes = [
   {
@@ -33,6 +38,11 @@ const routes: Routes = [
       { path: 'solicitudes', component: SolicitudesComponent },
       { path: 'asistencias', component: AsistenciasComponent },
       { path: 'empleados', component: EmployeesListComponent },
+      { path: 'empleados/:id', component: AdminPanelComponent },
+      { path: 'actividades/:id', component: AssignmentsComponent },
+      { path: 'evaluaciones/:id', component: ReportsComponent },
+      { path: 'evaluaciones/ver/:reportid', component: ReportComponent },
+      { path: 'solicitudes/:id', component: PermissionsComponent },
       {
         path: 'base',
         loadChildren: () =>

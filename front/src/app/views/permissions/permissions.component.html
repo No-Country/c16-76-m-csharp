@@ -1,0 +1,12 @@
+<h4>Listado de Permisos</h4>
+
+<br>
+
+<div *ngFor="let permission of permissions">
+
+    <span>| {{permission.id}} |</span>
+    <span>| {{permission.type}} |</span>
+    <span>| {{permission.limitDays}} |</span>
+    <span>| {{permission.status}} |</span>
+        
+</div>

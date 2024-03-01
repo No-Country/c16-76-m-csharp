@@ -27,6 +27,11 @@ import { WidgetsModule } from '../widgets/widgets.module';
 import { DashBoardEmployesComponent } from '../dash-board-employes/dash-board-employes.component';
 import { EmployeesListComponent } from '../employees/employees-list/employees-list.component';
 import { SolicitudesComponent } from '../solicitudes/solicitudes.component';
+import { AdminPanelComponent } from '../admin-panel/admin-panel.component';
+import { AssignmentsComponent } from '../assignments/assignments.component';
+import { ReportsComponent } from '../reports/reports.component';
+import { PermissionsComponent } from '../permissions/permissions.component';
+import { ReportComponent } from '../report/report.component';
 
 @NgModule({
   imports: [
@@ -52,6 +57,15 @@ import { SolicitudesComponent } from '../solicitudes/solicitudes.component';
     UtilitiesModule,
     WidgetsModule,
   ],
-  declarations: [DashboardComponent, EmployeesListComponent, SolicitudesComponent],
+  declarations: [
+    DashboardComponent, 
+    EmployeesListComponent, 
+    SolicitudesComponent,
+    AdminPanelComponent,
+    AssignmentsComponent,
+    ReportsComponent,
+    PermissionsComponent,
+    ReportComponent
+  ],
 })
 export class DashboardModule {}
