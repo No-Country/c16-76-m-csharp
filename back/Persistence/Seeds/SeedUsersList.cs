@@ -6,7 +6,7 @@ namespace back.Persistence.Seeds
     {
         public static ICollection<AppUser> Users = new List<AppUser>
         {
-            new AppUser
+            new ()
             {
                 FirstName = "Alice",
                 LastName = "Johnson",
@@ -17,7 +17,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Bob",
                 LastName = "Smith",
@@ -28,7 +28,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Charlie",
                 LastName = "Brown",
@@ -39,7 +39,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "David",
                 LastName = "Miller",
@@ -50,7 +50,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Ella",
                 LastName = "Garcia",
@@ -61,7 +61,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Fiona",
                 LastName = "Lee",
@@ -72,7 +72,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "George",
                 LastName = "Wang",
@@ -83,7 +83,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Hannah",
                 LastName = "Choi",
@@ -94,7 +94,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Isaac",
                 LastName = "Martinez",
@@ -105,7 +105,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Julia",
                 LastName = "Nguyen",
@@ -116,7 +116,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Katie",
                 LastName = "Rodriguez",
@@ -127,7 +127,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Liam",
                 LastName = "Gonzalez",
@@ -138,7 +138,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Mia",
                 LastName = "Lopez",
@@ -149,7 +149,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Noah",
                 LastName = "Ramirez",
@@ -160,7 +160,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Olivia",
                 LastName = "Perez",
@@ -171,7 +171,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Peter",
                 LastName = "Gomez",
@@ -182,7 +182,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Quinn",
                 LastName = "Rivera",
@@ -193,7 +193,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Rachel",
                 LastName = "Sanchez",
@@ -204,7 +204,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Samuel",
                 LastName = "Torres",
@@ -215,7 +215,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Tara",
                 LastName = "Vargas",
@@ -226,7 +226,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Ursula",
                 LastName = "Martinez",
@@ -237,7 +237,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Victor",
                 LastName = "Nguyen",
@@ -248,7 +248,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Wendy",
                 LastName = "O'Connor",
@@ -259,7 +259,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Xavier",
                 LastName = "Perez",
@@ -270,7 +270,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Yara",
                 LastName = "Quintero",
@@ -281,7 +281,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Zara",
                 LastName = "Ramirez",
@@ -292,7 +292,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Aaron",
                 LastName = "Gonzalez",
@@ -303,7 +303,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Bella",
                 LastName = "Choi",
@@ -314,7 +314,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Carlos",
                 LastName = "Martinez",
@@ -325,7 +325,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Diana",
                 LastName = "Nguyen",
@@ -336,7 +336,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Eva",
                 LastName = "Rodriguez",
@@ -347,7 +347,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Frank",
                 LastName = "Gonzalez",
@@ -358,7 +358,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Grace",
                 LastName = "Choi",
@@ -369,7 +369,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Henry",
                 LastName = "Martinez",
@@ -380,7 +380,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Ivy",
                 LastName = "Nguyen",
@@ -391,7 +391,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Jack",
                 LastName = "Hernandez",
@@ -402,7 +402,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Karen",
                 LastName = "Lopez",
@@ -413,7 +413,7 @@ namespace back.Persistence.Seeds
                 PhoneNumberConfirmed = true,
                 Profile = EntityRelationMethods.SeedProfile()
             },
-            new AppUser
+            new ()
             {
                 FirstName = "Leo",
                 LastName = "Choi",

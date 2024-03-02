@@ -6,47 +6,47 @@ namespace back.Persistence.Seeds
     {
         public static ICollection<PermissionType> Types = new List<PermissionType>
         {
-            new PermissionType
+            new ()
             {
                 Name = "Médico o accidente",
                 LimitDays = 5
             },
-            new PermissionType
+            new ()
             {
                 Name = "Fallecimiento, accidente o enfermedad grave de familiar",
                 LimitDays = 3
             },
-            new PermissionType
+            new ()
             {
                 Name = "Trámite",
                 LimitDays = 1
             },
-            new PermissionType
+            new ()
             {
                 Name = "Matrimonio",
                 LimitDays = 3
             },
-            new PermissionType
+            new ()
             {
                 Name = "Maternidad",
                 LimitDays = 50
             },
-            new PermissionType
+            new ()
             {
                 Name = "Paternidad",
                 LimitDays = 7
             },
-            new PermissionType
+            new ()
             {
                 Name = "Mudanza",
                 LimitDays = 2
             },
-            new PermissionType
+            new ()
             {
                 Name = "Deberes inexcusables",
                 LimitDays = 1
             },
-            new PermissionType
+            new ()
             {
                 Name = "Formación",
                 LimitDays = 1

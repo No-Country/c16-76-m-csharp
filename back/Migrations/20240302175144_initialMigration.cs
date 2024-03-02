@@ -52,6 +52,23 @@ namespace back.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PermissionStatus",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PermissionStatus", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PermissionTypes",
                 columns: table => new
                 {
@@ -214,7 +231,6 @@ namespace back.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
                     ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -270,8 +286,10 @@ namespace back.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     DaysAmount = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StatusId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PermissionTypeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TypeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -282,8 +300,14 @@ namespace back.Migrations
                 {
                     table.PrimaryKey("PK_Permissions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Permissions_PermissionTypes_PermissionTypeId",
-                        column: x => x.PermissionTypeId,
+                        name: "FK_Permissions_PermissionStatus_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "PermissionStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Permissions_PermissionTypes_TypeId",
+                        column: x => x.TypeId,
                         principalTable: "PermissionTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -373,14 +397,19 @@ namespace back.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_PermissionTypeId",
-                table: "Permissions",
-                column: "PermissionTypeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Permissions_ProfileId",
                 table: "Permissions",
                 column: "ProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permissions_StatusId",
+                table: "Permissions",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permissions_TypeId",
+                table: "Permissions",
+                column: "TypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Profiles_AppUserId",
@@ -425,6 +454,9 @@ namespace back.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "PermissionStatus");
 
             migrationBuilder.DropTable(
                 name: "PermissionTypes");

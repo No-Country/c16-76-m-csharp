@@ -35,12 +35,12 @@ namespace back.Validations
                 .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
 
-            RuleFor(x => x.Status)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("The {PropertyName} field is required.")
-                .When(x => x.Status is Status status)
-                .WithMessage("The {PropertyName} must be : 'ToDo', 'InProgress', 'InReview' or 'Done'.");
+            //RuleFor(x => x.Status)
+            //    .NotNull()
+            //    .NotEmpty()
+            //    .WithMessage("The {PropertyName} field is required.")
+            //    .When(x => x.Status is Status status)
+            //    .WithMessage("The {PropertyName} must be : 'ToDo', 'InProgress', 'InReview' or 'Done'.");
         }
     }
 }

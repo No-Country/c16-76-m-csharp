@@ -27,10 +27,12 @@ class ActivityStatusService : IActivityStatusService
         _mapper = mapper;
     }
 
-    public async Task<BaseResponse<List<AssignmentDto>>> GetAll(int pageSize, int pageNumber, Status? status)
+    // public async Task<BaseResponse<List<AssignmentDto>>> GetAll(int pageSize, int pageNumber, Status? status)
+    public async Task<BaseResponse<List<AssignmentDto>>> GetAll(int pageSize, int pageNumber)
     {
         List<Assignment>? filterByStatus = null;
-        var filterStatus = status is null;
+        // var filterStatus = status is null;
+        
 
         var users = await _appDbContext.Assignments
             .OrderBy(x => x.StartDate)
@@ -41,8 +43,8 @@ class ActivityStatusService : IActivityStatusService
             .ToListAsync();
 
         // If status exist, filter by the current status
-        if (!filterStatus)
-            filterByStatus = users.Where(x => x.Status == status).ToList();
+        //if (!filterStatus)
+        //    filterByStatus = users.Where(x => x.Status == status).ToList();
 
         var mapper = filterByStatus is null ? users : filterByStatus;
         var assignmentDtos = _mapper.Map<List<AssignmentDto>>(mapper);
@@ -150,7 +152,7 @@ class ActivityStatusService : IActivityStatusService
         currentAssignament.Description = dto.Description;
         // currentAssignament.StartDate = dto.StartDate;
         currentAssignament.EndDate = dto.EndDate;
-        currentAssignament.Status = dto.Status;
+        // currentAssignament.Status = dto.Status;
 
         _appDbContext.Update(currentAssignament);
         await _appDbContext.SaveChangesAsync();

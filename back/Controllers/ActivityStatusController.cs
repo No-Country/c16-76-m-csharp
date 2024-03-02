@@ -17,9 +17,11 @@ public class ActivityStatusController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(int pageSize, int pageNumber, Status? status)
+    // public async Task<IActionResult> GetAll(int pageSize, int pageNumber, Status? status)
+    public async Task<IActionResult> GetAll(int pageSize, int pageNumber)
     {
-        return Ok(_activityStatusService.GetAll(pageSize, pageNumber, status).Result);
+        // return Ok(_activityStatusService.GetAll(pageSize, pageNumber, status).Result);
+        return Ok(_activityStatusService.GetAll(pageSize, pageNumber).Result);
     }
 
     [HttpGet("{id}")]

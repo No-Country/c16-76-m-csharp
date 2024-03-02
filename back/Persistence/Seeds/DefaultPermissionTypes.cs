@@ -10,9 +10,13 @@ namespace back.Persistence.Seeds
         {
             foreach (var type in SeedPermissionTypesList.Types)
             {
-                context.PermissionTypes.Add(type);
+                var typesNames = context.PermissionTypes.Select(x => x.Name).ToList();
 
-                await context.SaveChangesAsync();
+                if (!typesNames.Contains(type.Name))
+                {
+                    context.PermissionTypes.Add(type);
+                    await context.SaveChangesAsync();
+                }
             }
         }
     }

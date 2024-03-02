@@ -12,7 +12,7 @@ using back.Persistence;
 namespace back.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240229173909_initialMigration")]
+    [Migration("20240302175144_initialMigration")]
     partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,9 +64,6 @@ namespace back.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -147,6 +144,9 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DaysAmount")
                         .HasColumnType("int");
 
@@ -160,21 +160,59 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PermissionTypeId")
+                    b.Property<string>("ProfileId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProfileId")
+                    b.Property<string>("StatusId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TypeId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PermissionTypeId");
-
                     b.HasIndex("ProfileId");
 
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("TypeId");
+
                     b.ToTable("Permissions", (string)null);
+                });
+
+            modelBuilder.Entity("back.Entities.PermissionStatus", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PermissionStatus", (string)null);
                 });
 
             modelBuilder.Entity("back.Entities.PermissionType", b =>
@@ -551,21 +589,29 @@ namespace back.Migrations
 
             modelBuilder.Entity("back.Entities.Permission", b =>
                 {
-                    b.HasOne("back.Entities.PermissionType", "PermissionType")
-                        .WithMany("Permissions")
-                        .HasForeignKey("PermissionTypeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("back.Entities.UserProfile", "Profile")
                         .WithMany("Permissions")
                         .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("PermissionType");
+                    b.HasOne("back.Entities.PermissionStatus", "Status")
+                        .WithMany("Permissions")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("back.Entities.PermissionType", "Type")
+                        .WithMany("Permissions")
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Profile");
+
+                    b.Navigation("Status");
+
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("back.Entities.Report", b =>
@@ -639,6 +685,11 @@ namespace back.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("back.Entities.PermissionStatus", b =>
+                {
+                    b.Navigation("Permissions");
                 });
 
             modelBuilder.Entity("back.Entities.PermissionType", b =>

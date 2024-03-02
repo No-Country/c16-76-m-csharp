@@ -1,7 +1,11 @@
 export interface permissionDTO {
     id: string
-    type: string
+    daysAmount: number
     limitDays: number
-    status: string
-    profile: string
+    date: string
+    statusId: string
+    statusName: string
+    typeId: string
+    typeName: string
+    profileId: string
 }

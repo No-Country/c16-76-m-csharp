@@ -28,6 +28,7 @@ builder.Services.AddTransient<IActivityStatusService, ActivityStatusService>();
 builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddTransient<IBenefitsSummaryService, BenefitsSummaryService>();
 builder.Services.AddTransient<IReportService, ReportService>();
+builder.Services.AddTransient<IPermissionsService, PermissionsService>();
 
 // Validations
 builder.Services.AddTransient<IValidator<AssignmentDto>, AssignmentDtoValidator>();
@@ -36,6 +37,7 @@ builder.Services.AddTransient<IValidator<UserRequestDTO>, RegisterUserDTOValidat
 builder.Services.AddTransient<IValidator<ProfileRequestDTO>, ProfileRequestDTOValidator>();
 builder.Services.AddTransient<IValidator<BenefitsSummaryRequestDTO>, BenefitsSummaryDTOValidator>();
 builder.Services.AddTransient<IValidator<ReportRequestDto>, ReportRequestDtoValidator>();
+builder.Services.AddTransient<IValidator<PermissionRequestDTO>, PermissionRequestDTOValidator>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -97,4 +99,5 @@ async Task SeedUsers()
     await DefaultAdminUser.SeedAsync(userManager, roleManager);
     await DefaultBasicUser.SeedAsync(userManager, roleManager);
     await DefaultPermissionTypes.SeedAsync(context);
+    await DefaultPermissionStatus.SeedAsync(context);
 }
