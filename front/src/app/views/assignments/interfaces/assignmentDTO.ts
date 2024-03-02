@@ -4,6 +4,7 @@ export interface assignmentDTO {
     description: string
     startDate: string
     endDate: string
-    status: string
+    statusId: string
+    statusName: string
     profileId: string
 }

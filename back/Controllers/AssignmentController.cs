@@ -1,17 +1,15 @@
 using back.DTOs;
-using back.Entities;
-using back.Enums;
 using back.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 namespace back.Controller;
 
 [Route("api/[controller]")]
 [ApiController]
-public class ActivityStatusController : ControllerBase
+public class AssignmentController : ControllerBase
 {
 
-    private readonly IActivityStatusService _activityStatusService;
-    public ActivityStatusController(IActivityStatusService activityStatusService)
+    private readonly IAssignmentService _activityStatusService;
+    public AssignmentController(IAssignmentService activityStatusService)
     {
         _activityStatusService = activityStatusService;
     }
@@ -35,14 +33,14 @@ public class ActivityStatusController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(AssignmentDto dto)
+    public async Task<IActionResult> Create(AssignmentRequestDTO dto)
     {
         var assignment = await _activityStatusService.Create(dto);
         return Ok(assignment);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, AssignmentDto dto)
+    public async Task<IActionResult> Update(string id, AssignmentRequestDTO dto)
     {
         if (string.IsNullOrEmpty(id)) return BadRequest("Email was not provided");
 

@@ -63,11 +63,49 @@ namespace back.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("StatusId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
 
+                    b.HasIndex("StatusId");
+
                     b.ToTable("Assignments", (string)null);
+                });
+
+            modelBuilder.Entity("back.Entities.AssignmentStatus", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AssignmentStatus", (string)null);
                 });
 
             modelBuilder.Entity("back.Entities.BenefitsSummary", b =>
@@ -571,7 +609,15 @@ namespace back.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("back.Entities.AssignmentStatus", "Status")
+                        .WithMany("Assignments")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("Profile");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("back.Entities.BenefitsSummary", b =>
@@ -683,6 +729,11 @@ namespace back.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("back.Entities.AssignmentStatus", b =>
+                {
+                    b.Navigation("Assignments");
                 });
 
             modelBuilder.Entity("back.Entities.PermissionStatus", b =>

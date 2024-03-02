@@ -26,6 +26,7 @@ namespace back.Persistence
         public DbSet<BenefitsSummary> BenefitsSummaries { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<PermissionStatus> PermissionStatus { get; set; }
+        public DbSet<AssignmentStatus> AssignmentStatus { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

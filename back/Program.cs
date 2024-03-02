@@ -24,14 +24,14 @@ builder.Services.AddControllers().AddJsonOptions(x =>
 // Services
 builder.Services.AddTransient<IDateTimeService, DateTimeService>();
 builder.Services.AddTransient<IUserService, UserService>();
-builder.Services.AddTransient<IActivityStatusService, ActivityStatusService>();
+builder.Services.AddTransient<IAssignmentService, AssignmentService>();
 builder.Services.AddTransient<IProfileService, ProfileService>();
 builder.Services.AddTransient<IBenefitsSummaryService, BenefitsSummaryService>();
 builder.Services.AddTransient<IReportService, ReportService>();
 builder.Services.AddTransient<IPermissionsService, PermissionsService>();
 
 // Validations
-builder.Services.AddTransient<IValidator<AssignmentDto>, AssignmentDtoValidator>();
+builder.Services.AddTransient<IValidator<AssignmentRequestDTO>, AssignmentRequestDTOValidator>();
 builder.Services.AddTransient<IValidator<UserDto>, UserDtoValidator>();
 builder.Services.AddTransient<IValidator<UserRequestDTO>, RegisterUserDTOValidator>();
 builder.Services.AddTransient<IValidator<ProfileRequestDTO>, ProfileRequestDTOValidator>();
@@ -100,4 +100,5 @@ async Task SeedUsers()
     await DefaultBasicUser.SeedAsync(userManager, roleManager);
     await DefaultPermissionTypes.SeedAsync(context);
     await DefaultPermissionStatus.SeedAsync(context);
+    await DefaultAssignmentStatus.SeedAsync(context);
 }

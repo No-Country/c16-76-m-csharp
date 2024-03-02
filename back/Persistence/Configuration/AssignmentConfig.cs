@@ -17,6 +17,12 @@ namespace back.Persistence.Configuration
                 .HasForeignKey(x => x.ProfileId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Status)
+                .WithMany(x => x.Assignments)
+                .HasForeignKey(x => x.StatusId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

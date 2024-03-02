@@ -52,6 +52,23 @@ namespace back.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AssignmentStatus",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AssignmentStatus", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PermissionStatus",
                 columns: table => new
                 {
@@ -231,6 +248,7 @@ namespace back.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StatusId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProfileId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -241,6 +259,12 @@ namespace back.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assignments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Assignments_AssignmentStatus_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "AssignmentStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Assignments_Profiles_ProfileId",
                         column: x => x.ProfileId,
@@ -391,6 +415,11 @@ namespace back.Migrations
                 column: "ProfileId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Assignments_StatusId",
+                table: "Assignments",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BenefitsSummaries_ProfileId",
                 table: "BenefitsSummaries",
                 column: "ProfileId",
@@ -454,6 +483,9 @@ namespace back.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "AssignmentStatus");
 
             migrationBuilder.DropTable(
                 name: "PermissionStatus");

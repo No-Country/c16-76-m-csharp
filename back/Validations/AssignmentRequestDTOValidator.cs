@@ -1,20 +1,14 @@
+using back.DTOs;
 using back.Entities;
 using back.Enums;
 using FluentValidation;
 
 namespace back.Validations
 {
-    public class AssignmentDtoValidator : AbstractValidator<AssignmentDto>
+    public class AssignmentRequestDTOValidator : AbstractValidator<AssignmentRequestDTO>
     {
-        public AssignmentDtoValidator()
+        public AssignmentRequestDTOValidator()
         {
-            RuleFor(x => x.ProfileEmail)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("The {PropertyName} field is required.")
-                .EmailAddress()
-                .WithMessage("The {PropertyName} must be a valid email.");
-
             RuleFor(x => x.Name)
                 .NotNull()
                 .NotEmpty()
@@ -35,12 +29,15 @@ namespace back.Validations
                 .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
 
-            //RuleFor(x => x.Status)
-            //    .NotNull()
-            //    .NotEmpty()
-            //    .WithMessage("The {PropertyName} field is required.")
-            //    .When(x => x.Status is Status status)
-            //    .WithMessage("The {PropertyName} must be : 'ToDo', 'InProgress', 'InReview' or 'Done'.");
+            RuleFor(x => x.StatusId)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("The {PropertyName} field is required.");
+
+            RuleFor(x => x.ProfileId)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("The {PropertyName} field is required.");
         }
     }
 }
