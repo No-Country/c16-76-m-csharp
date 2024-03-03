@@ -12,7 +12,8 @@ namespace back.Mappings
             CreateMap<AppUser, UserDto>();
             CreateMap<UserRequestDTO, AppUser>();
             CreateMap<AssignmentDto, Assignment>().ReverseMap();
-            CreateMap<UserProfile, ProfileDto>(); 
+            CreateMap<UserProfile, ProfileDto>();
+            CreateMap<UserProfile, ProfilesDto>();
             CreateMap<ProfileRequestDTO, UserProfile>();
             CreateMap<BenefitsSummary, BenefitsSummaryDto>();
             CreateMap<BenefitsSummaryRequestDTO, BenefitsSummary>();

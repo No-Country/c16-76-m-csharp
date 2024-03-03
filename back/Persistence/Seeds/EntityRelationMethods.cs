@@ -15,6 +15,7 @@ namespace back.Persistence.Seeds
                 State = "NoState",
                 Municipality = "NoMunicipality",
                 Salary = 500,
+                AdmissionDate = "10/10/02",
                 BenefitsSummary = SeedBenefitsSummary()
             };
 
