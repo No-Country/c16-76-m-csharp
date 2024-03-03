@@ -66,7 +66,7 @@ public class ProfileService : IProfileService
             UserName = profile.AppUser.UserName,
             Email = profile.AppUser.Email,
             PhoneNumber = profile.AppUser.PhoneNumber,
-            Assist = profile.Assist,
+            Assists = profile.Assist,
             Absences = profile.Absences,
             Delays = profile.Delays,
             Country = profile.Country,

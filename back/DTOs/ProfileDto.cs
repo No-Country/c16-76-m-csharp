@@ -8,7 +8,7 @@
         public string UserName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public int Assist { get; set; }
+        public int Assists { get; set; }
         public int Absences { get; set; }
         public int Delays { get; set; }
         public string Country { get; set; }

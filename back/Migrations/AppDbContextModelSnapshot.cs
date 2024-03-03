@@ -220,8 +220,12 @@ namespace back.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AchivedGoals")
-                        .HasColumnType("int");
+                    b.Property<double>("AchivedGoals")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Comments")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");

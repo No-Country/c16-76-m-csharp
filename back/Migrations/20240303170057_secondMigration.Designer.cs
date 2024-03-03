@@ -12,8 +12,8 @@ using back.Persistence;
 namespace back.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240302231731_ProfileFieldAdmissionDate")]
-    partial class ProfileFieldAdmissionDate
+    [Migration("20240303170057_secondMigration")]
+    partial class secondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -222,8 +222,12 @@ namespace back.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AchivedGoals")
-                        .HasColumnType("int");
+                    b.Property<double>("AchivedGoals")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Comments")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
