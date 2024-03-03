@@ -19,9 +19,15 @@ namespace back.Persistence.Configuration
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.PermissionType)
+            builder.HasOne(x => x.Type)
                 .WithMany(x => x.Permissions)
-                .HasForeignKey(x => x.PermissionTypeId)
+                .HasForeignKey(x => x.TypeId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Status)
+                .WithMany(x => x.Permissions)
+                .HasForeignKey(x => x.StatusId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
         }
