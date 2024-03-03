@@ -11,11 +11,12 @@ namespace back.Mappings
         {
             CreateMap<AppUser, UserDto>();
             CreateMap<UserRequestDTO, AppUser>();
+            
+            CreateMap<UserProfile, ProfilesDto>();
             CreateMap<UserProfile, ProfileDto>();
-
             CreateMap<Assignment, AssignmentDto>();
             CreateMap<AssignmentRequestDTO, Assignment>();
-            
+
             CreateMap<ProfileRequestDTO, UserProfile>();
 
             CreateMap<BenefitsSummary, BenefitsSummaryDto>();

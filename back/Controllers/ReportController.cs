@@ -20,7 +20,7 @@ public class ReportController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] PaginationDTO paginationDTO)
     {
-        return Ok(_reportService.GetAll(paginationDTO.PageSize, paginationDTO.PageNumber).Result);
+        return Ok(_reportService.GetAll(paginationDTO).Result);
     }
 
     [HttpGet("{id}")]
@@ -29,6 +29,16 @@ public class ReportController : ControllerBase
         if (string.IsNullOrEmpty(id)) return BadRequest("Id was not provided");
 
         var report = _reportService.GetById(id).Result;
+
+        return Ok(report);
+    }
+
+    [HttpGet("profile/{uid}")]
+    public async Task<IActionResult> GetByUserId(string uid, [FromQuery] PaginationDTO paginationDTO)
+    {
+        if (string.IsNullOrEmpty(uid)) return BadRequest("Uid was not provided");
+
+        var report = _reportService.GetByUserId(uid, paginationDTO).Result;
 
         return Ok(report);
     }

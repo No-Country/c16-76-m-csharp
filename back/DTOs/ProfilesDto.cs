@@ -1,10 +1,10 @@
-﻿using back.Entities.Common;
 using back.Entities.User;
 
 namespace back.Entities
 {
-    public class UserProfile : BaseEntity
+    public class ProfilesDto
     {
+        public virtual string Id { get; set; }
         public int Assist { get; set; }
         public int Absences { get; set; }
         public int Delays { get; set; }
@@ -14,15 +14,14 @@ namespace back.Entities
         public double Salary { get; set; }
         public string AdmissionDate { get; set; }
 
-        public string AppUserId { get; set; }
         public AppUser AppUser { get; set; }
 
-        public BenefitsSummary BenefitsSummary { get; set; }
+        // public BenefitsSummary BenefitsSummary { get; set; }
 
-        public ICollection<Permission> Permissions { get; set; }
+        // public ICollection<Permission> Permissions { get; set; }
 
-        public ICollection<Report> Reports { get; set; }
+        // public ICollection<Report> Reports { get; set; }
 
-        public ICollection<Assignment> Assignments { get; set; }
+        // public ICollection<Assignment> Assignments { get; set; }
     }
 }

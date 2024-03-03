@@ -1,4 +1,5 @@
 using AutoMapper;
+using back.DTOs;
 using back.Entities;
 using back.Interfaces;
 using back.Persistence;
@@ -11,18 +12,21 @@ namespace back.Services
     public class ReportService : IReportService
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IProfileService _profileService;
         private readonly IValidator<ReportRequestDto> _reportDtoValidator;
         private readonly IMapper _mapper;
 
         public ReportService(
             AppDbContext appDbContext,
             IValidator<ReportRequestDto> reportDtoValidator,
-            IMapper mapper
+            IMapper mapper,
+            IProfileService profileService
         )
         {
             _appDbContext = appDbContext;
             _reportDtoValidator = reportDtoValidator;
             _mapper = mapper;
+            _profileService = profileService;
         }
 
         public async Task<BaseResponse<string>> Create(ReportRequestDto dto)
@@ -35,6 +39,11 @@ namespace back.Services
                     Errors = validator.Errors.Select(x => x.ErrorMessage).ToList()
                 };
 
+            var profile = _profileService.GetProfileById(dto.ProfileId).Result;
+
+            if (profile.Data is null)
+                return new BaseResponse<string>($"There are not profiles with id: {dto.ProfileId}");
+
             Report newReport = _mapper.Map<Report>(dto);
 
             _appDbContext.Add(newReport);
@@ -45,7 +54,9 @@ namespace back.Services
 
         public async Task<BaseResponse<string>> Delete(string id)
         {
-            var report = await _appDbContext.Reports.Where(x => x.Id == id && !x.IsDeleted).FirstOrDefaultAsync();
+            var report = await _appDbContext.Reports
+                .Where(x => x.Id == id && !x.IsDeleted)
+                .FirstOrDefaultAsync();
 
             if (report is null)
                 return new BaseResponse<string>($"There are not records with id: {id}") { };
@@ -58,33 +69,61 @@ namespace back.Services
             return new BaseResponse<string>($"The report has been deleted succesfully!");
         }
 
-        public async Task<BaseResponse<List<ReportDto>>> GetAll(int pageSize, int pageNumber)
+        public async Task<BaseResponse<List<ReportDto>>> GetAll(PaginationDTO paginationDTO)
         {
 
             var reports = await _appDbContext.Reports
                 .OrderBy(x => x.Date)
                 .Where(x => !x.IsDeleted)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                // .Include(p=>p.Profile)
+                .Skip((paginationDTO.PageNumber - 1) * paginationDTO.PageSize)
+                .Take(paginationDTO.PageSize)
+                .Include(p => p.Profile)
                 .ToListAsync();
 
-            var reportsMap = _mapper.Map<List<ReportDto>>(reports.ToList());
+            var reportsMap = _mapper.Map<List<ReportDto>>(reports);
 
             return new BaseResponse<List<ReportDto>>(reportsMap) { };
         }
 
         public async Task<BaseResponse<ReportDto>> GetById(string id)
         {
-            var report = await _appDbContext.Reports.Where(x => x.Id == id && !x.IsDeleted).FirstOrDefaultAsync();
+            var report = await _appDbContext.Reports
+                .Where(x => x.Id == id && !x.IsDeleted)
+                .FirstOrDefaultAsync();
 
             if (report is null)
-            {
                 return new BaseResponse<ReportDto>($"There are not records with id: {id}") { };
-            }
 
-            var dto = _mapper.Map<ReportDto>(report);
-            return new BaseResponse<ReportDto>(dto) { };
+
+            var reportDto = _mapper.Map<ReportDto>(report);
+
+            // ReportDto reportDto = new()
+            // {
+            //     Id = report.Id,
+            //     Date = report.Date,
+            //     Performance = report.Performance,
+            //     AchivedGoals = report.AchivedGoals,
+            //     SavedMoney = report.SavedMoney,
+            //     ProfileId = report.ProfileId,
+            //     // Comments = report.Comments,
+            // };
+            return new BaseResponse<ReportDto>(reportDto) { };
+        }
+
+        public async Task<BaseResponse<List<ReportDto>>> GetByUserId(string uid, PaginationDTO paginationDTO)
+        {
+            var reports = await _appDbContext.Reports
+                .Where(x => x.ProfileId == uid && !x.IsDeleted)
+                .Skip((paginationDTO.PageNumber - 1) * paginationDTO.PageSize)
+                .Take(paginationDTO.PageSize)
+                .ToListAsync();
+
+            if (reports is null)
+                return new BaseResponse<List<ReportDto>>($"There are not records with uid: {uid}") { };
+
+            var reportsMap = _mapper.Map<List<ReportDto>>(reports);
+
+            return new BaseResponse<List<ReportDto>>(reportsMap) { };
         }
 
         public async Task<BaseResponse<string>> Update(string id, ReportRequestDto dto)

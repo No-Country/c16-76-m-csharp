@@ -22,9 +22,9 @@ namespace back.Validations
             RuleFor(x => x.AchivedGoals)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("The {PropertyName} field is required.")
-                .GreaterThan(0)
-                .WithMessage("The {PropertyName} must be greater than 0");
+                .WithMessage("The {PropertyName} field is required.");
+                //.GreaterThan(0)
+                //.WithMessage("The {PropertyName} must be greater than 0");
 
             RuleFor(x => x.SavedMoney)
                 .NotNull()
@@ -34,6 +34,11 @@ namespace back.Validations
                 .WithMessage("The {PropertyName} must be greater than 0");
 
             RuleFor(x => x.ProfileId)
+                .NotNull()
+                .NotEmpty()
+                .WithMessage("The {PropertyName} field is required.");
+            
+            RuleFor(x => x.Comments)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("The {PropertyName} field is required.");
