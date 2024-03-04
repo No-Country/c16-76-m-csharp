@@ -32,6 +32,7 @@ import { AssignmentsComponent } from '../assignments/assignments.component';
 import { ReportsComponent } from '../reports/reports.component';
 import { PermissionsComponent } from '../permissions/permissions.component';
 import { ReportComponent } from '../report/report.component';
+import { AsistenciasComponent } from '../asistencias/asistencias.component';
 
 @NgModule({
   imports: [
@@ -65,7 +66,8 @@ import { ReportComponent } from '../report/report.component';
     AssignmentsComponent,
     ReportsComponent,
     PermissionsComponent,
-    ReportComponent
+    ReportComponent,
+    AsistenciasComponent
   ],
 })
 export class DashboardModule {}

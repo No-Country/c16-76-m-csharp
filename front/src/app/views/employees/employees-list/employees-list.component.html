@@ -13,11 +13,11 @@
     <tr>
       <th scope="col">#</th>
       <!-- <th scope="col">Id</th> -->
-      <th scope="col">User Name</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone Number</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Correo</th>
+      <th scope="col">Telefono</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -26,9 +26,11 @@
       <td scope="row">{{ i + 1 }}</td>
       <!-- <th scope="row">{{employee.id}}</th> -->
       <th scope="row">
-        <a routerLink="/empleados/{{employee.id}}" class="text-decoration-none text-black">{{
-          employee.userName
-        }}</a>
+        <a
+          routerLink="/empleados/{{ employee.id }}"
+          class="text-decoration-none text-black"
+          >{{ employee.userName }}</a
+        >
       </th>
       <th scope="row">{{ employee.firstName }}</th>
       <th scope="row">{{ employee.lastName }}</th>
@@ -100,7 +102,15 @@
     ></button>
   </c-modal-header>
   <c-modal-body>
-    <form [formGroup]="form" (submit)="create()" [gutter]="3" cForm cRow class="needs-validation" ngNativeValidate>
+    <form
+      [formGroup]="form"
+      (submit)="create()"
+      [gutter]="3"
+      cForm
+      cRow
+      class="needs-validation"
+      ngNativeValidate
+    >
       <c-col [md]="6">
         <label cLabel for="validationServer01">Nombre</label>
         <input
@@ -176,16 +186,9 @@
         >
       </c-col>
 
-      <button
-        
-        cButton
-        color="success"
-        class="text-white me-1"
-        type="submit"
-      >
+      <button cButton color="success" class="text-white me-1" type="submit">
         Crear Usuario
       </button>
-
     </form>
   </c-modal-body>
   <c-modal-footer>
@@ -217,22 +220,36 @@
     ></button>
   </c-modal-header>
   <c-modal-body
-    ><form [formGroup]="form" (submit)="edit()" cForm class="row g-3" >
-
+    ><form [formGroup]="form" (submit)="edit()" cForm class="row g-3">
       <input hidden formControlName="id" type="text" />
       <input hidden formControlName="originalEmail" type="text" />
 
       <c-col [md]="6">
         <label cLabel for="firstName">Nombre</label>
-        <input cFormControl formControlName="firstName" id="firstName" type="text" />
+        <input
+          cFormControl
+          formControlName="firstName"
+          id="firstName"
+          type="text"
+        />
       </c-col>
       <c-col [xs]="6">
         <label cLabel for="lastName">Apellidos</label>
-        <input cFormControl formControlName="lastName" id="lastName" type="text" />
+        <input
+          cFormControl
+          formControlName="lastName"
+          id="lastName"
+          type="text"
+        />
       </c-col>
       <c-col [md]="6">
         <label cLabel for="userName">Nombre de Usuario</label>
-        <input cFormControl formControlName="userName" id="userName" type="text" />
+        <input
+          cFormControl
+          formControlName="userName"
+          id="userName"
+          type="text"
+        />
       </c-col>
       <c-col [xs]="6">
         <label cLabel for="email">Correo</label>
@@ -240,20 +257,17 @@
       </c-col>
       <c-col [md]="6">
         <label cLabel for="phoneNumber">Telefono</label>
-        <input cFormControl formControlName="phoneNumber" id="phoneNumber" type="text" />
+        <input
+          cFormControl
+          formControlName="phoneNumber"
+          id="phoneNumber"
+          type="text"
+        />
       </c-col>
 
-      <button
-        
-        cButton
-        color="success"
-        class="text-white me-1"
-        type="submit"
-      >
+      <button cButton color="success" class="text-white me-1" type="submit">
         Actualizar Usuario
       </button>
-
-
     </form>
   </c-modal-body>
   <c-modal-footer>
@@ -265,7 +279,6 @@
     >
       Cerrar
     </button>
-    
   </c-modal-footer>
 </c-modal>
 
@@ -296,7 +309,6 @@
   ></c-modal-body>
 
   <c-modal-footer class="d-flex justify-content-evenly">
-
     <button
       [cModalToggle]="eliminarUsuario.id"
       cButton
@@ -319,34 +331,37 @@
 </c-modal>
 
 <div>
-
-  <form [formGroup]="pageSizeform" (submit)="getPagination()" [gutter]="3" cForm cRow>
+  <form
+    [formGroup]="pageSizeform"
+    (submit)="getPagination()"
+    [gutter]="3"
+    cForm
+    cRow
+  >
     <c-col [md]="3">
-      <label cLabel for="validationServer01">Cantidad de Registros por Página</label>
-      
-      <input formControlName="pageSize" cFormControl type="number"/>
-      
-      <br>
+      <label cLabel for="validationServer01"
+        >Cantidad de Registros por Página</label
+      >
+
+      <input formControlName="pageSize" cFormControl type="number" />
+
+      <br />
 
       <button cButton color="success" class="text-white me-1" type="submit">
-          Aplicar
+        Aplicar
       </button>
     </c-col>
-
   </form>
-  
-  <br>
-  
+
+  <br />
+
   <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li 
-        *ngFor="let page of totalPagesArray; let i = index" 
-        class="page-item"><a 
-        class="page-link" 
-        (click)="getAll(i + 1)">
-        {{i + 1}}
-      </a></li>
+      <li *ngFor="let page of totalPagesArray; let i = index" class="page-item">
+        <a class="page-link" (click)="getAll(i + 1)">
+          {{ i + 1 }}
+        </a>
+      </li>
     </ul>
   </nav>
-
 </div>
