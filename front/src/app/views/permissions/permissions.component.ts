@@ -24,4 +24,16 @@ export class PermissionsComponent {
       error: error => console.log(error)
     })
   }
+
+
+
+  public visible = false;
+
+  toggleLiveDemo() {
+    this.visible = !this.visible;
+  }
+
+  handleLiveDemoChange(event: any) {
+    this.visible = event;
+  }
 }

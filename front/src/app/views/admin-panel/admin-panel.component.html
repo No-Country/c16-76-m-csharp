@@ -1,41 +1,74 @@
-<div>
-    <h4>Información General</h4>
-    <p>Nombre: {{profile.firstName}}</p>
-    <p>Apellido: {{profile.lastName}}</p>
-    <p>Nombre de Usuario: {{profile.userName}}</p>
-    <p>Email: {{profile.email}}</p>
-    <p>Número de Teléfono: {{profile.phoneNumber}}</p>
-</div>
+<h4>Estás viendo el perfil de: {{profile.firstName | uppercase}} {{profile.lastName | uppercase}}</h4>
 
 <hr>
 
-<button (click)="toggleProfileInfo()" style="background-color: lightblue;">Ver Perfil</button>
-<button (click)="toggleBenefitsInfo()" style="background-color: antiquewhite;">Ver Prestaciones</button>
-<button (click)="verActividades()" style="background-color: lightcoral;">Ver Actividades</button>
-<button (click)="verReportes()" style="background-color: lightcyan;">Ver Evaluaciones</button>
-<button (click)="verSolicitudes()" style="background-color: lightseagreen;">Ver Solicitudes</button>
+<!-- Ciclo de Cards -->
+<c-row>
+    <c-col *ngFor="let item of colors; index as i" [lg]="4">
+      <c-card [color]="item.color"
+              [textColor]="item.color === 'warning' || item.color === 'light' ? '' :  'white'"
+              class="mb-3">
+        <c-card-header>{{item.header}}</c-card-header>
+        <c-card-body class="bg-gradient">
+          <p cCardText>
+            {{item.description}}
+          </p>
+          <button (click)="item?.method()" [color]="item.color" cButton class="shadow">{{item.buttonText}}</button>
+        </c-card-body>
+      </c-card>
+    </c-col>
+</c-row>
 
-<div *ngIf="showProfileInfo">
-    <div>
-        <h4>Perfil</h4>
-        <p>Asistencias: {{profile.assists}}</p>
-        <p>Faltas: {{profile.absences}}</p>
-        <p>Retardos: {{profile.delays}}</p>
-        <p>País: {{profile.country}}</p>
-        <p>Estado: {{profile.state}}</p>
-        <p>Municipio: {{profile.municipality}}</p>
-        <p>Sueldo (Mensual): {{profile.salary | currency}}</p>
-        <p>Fecha de Ingreso: {{profile.admissionDate}}</p>
-    </div>
-</div>
+<!-- Modal de Perfil de Empleado -->
+<!-- <c-modal id="profileModal" [visible]="profileVisible" (visibleChange)="handleLiveDemoChange($event)"> -->
+<c-modal id="profileModal" [visible]="profileVisible">
+  <c-modal-header>
+    <h5 cModalTitle>Perfil de empleado</h5>
+    <button (click)="toggleProfile()" cButtonClose></button>
+  </c-modal-header>
 
-<div *ngIf="showBenefitsInfo">
-    <div>
-        <h4>Prestaciones</h4>
-        <p>Bono Nivel A: {{benefits.bonusA}}</p>
-        <p *ngIf="benefits.includesBonusB">Bono Nivel B: {{benefits.bonusB}}</p>
-        <p *ngIf="benefits.includesBonusC">Bono Nivel C: {{benefits.bonusC}}</p>
-        <p>Holidays: {{benefits.holidays}}</p>
-        <p *ngIf="benefits.hasHealthCare">Seguro Médico: Incluido</p>
-    </div>
-</div>
+  <c-modal-body>
+    <p><strong>Nombre: </strong>{{profile.firstName}}</p>
+    <p><strong>Apellido: </strong>{{profile.lastName}}</p>
+    <p><strong>Nombre de Usuario: </strong>{{profile.userName}}</p>
+    <p><strong>Email: </strong>{{profile.email}}</p>
+    <p><strong>Número de Teléfono: </strong>{{profile.phoneNumber}}</p>
+    <p><strong>Asistencias: </strong>{{profile.assists}}</p>
+    <p><strong>Faltas: </strong>{{profile.absences}}</p>
+    <p><strong>Retardos: </strong>{{profile.delays}}</p>
+    <p><strong>País: </strong>{{profile.country}}</p>
+    <p><strong>Estado: </strong>{{profile.state}}</p>
+    <p><strong>Municipio: </strong>{{profile.municipality}}</p>
+    <p><strong>Sueldo Mensual (USD): </strong>{{profile.salary | currency}}</p>
+    <p><strong>Fecha de Ingreso: </strong>{{profile.admissionDate}}</p>
+  </c-modal-body>
+
+  <c-modal-footer>
+    <button (click)="toggleProfile()" cButton color="secondary">
+      Close
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<!-- Modal de Prestaciones de Empleado -->
+<!-- <c-modal id="benefitsModal" [visible]="benefitsVisible" (visibleChange)="handleLiveDemoChange($event)"> -->
+<c-modal id="benefitsModal" [visible]="benefitsVisible">
+    <c-modal-header>
+      <h5 cModalTitle>Prestaciones de Empleado</h5>
+      <button (click)="toggleBenefits()" cButtonClose></button>
+    </c-modal-header>
+  
+    <c-modal-body>
+        <p><strong>Bono Nivel A: </strong>{{benefits.bonusA | currency}}</p>
+        <p *ngIf="benefits.includesBonusB"><strong>Bono Nivel B: </strong>{{benefits.bonusB | currency}}</p>
+        <p *ngIf="benefits.includesBonusC"><strong>Bono Nivel C: </strong>{{benefits.bonusC | currency}}</p>
+        <p><strong>Holidays: </strong>{{benefits.holidays}}</p>
+        <p *ngIf="benefits.hasHealthCare"><strong>Seguro Médico: </strong>Incluido</p>
+    </c-modal-body>
+  
+    <c-modal-footer>
+      <button (click)="toggleBenefits()" cButton color="secondary">
+        Close
+      </button>
+    </c-modal-footer>
+  </c-modal>

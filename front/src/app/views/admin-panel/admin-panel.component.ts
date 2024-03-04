@@ -12,37 +12,79 @@ import { AdminPanelService } from '../admin-panel/admin-panel.service';
 })
 export class AdminPanelComponent  {
 
+  
   constructor
   (private activatedRoute: ActivatedRoute,
     private router: Router,
     private employeesService: EmployeesService,
     private adminPanelService: AdminPanelService) {}
 
+  colors = [
+    { 
+      header: 'Perfil de Empleado',
+      description: 'Revisar la información general del empleado',
+      color: 'danger',
+      textColor: 'danger',
+      buttonText: 'Ver',
+      method: this.toggleProfile.bind(this)
+    },
+    { 
+      header: 'Prestaciones',
+      description: 'Revisar los beneficios asignados al empleado',
+      color: 'warning',
+      textColor: 'warning',
+      buttonText: 'Ver',
+      method: this.toggleBenefits.bind(this)
+    },
+    { 
+      header: 'Actividades',
+      description: 'Revisar las actividades en proceso del empleado',
+      color: 'info',
+      textColor: 'info',
+      buttonText: 'Ir',
+      method: this.verActividades.bind(this)
+    },
+    { 
+      header: 'Evaluaciones',
+      description: 'Revisar las evaluaciones de desempeño del empleado',
+      color: 'light',
+      buttonText: 'Ir',
+      method: this.verReportes.bind(this)
+    },
+    { 
+      header: 'Solicitudes',
+      description: 'Revisar los solicitudes de permisos del empleado',
+      color: 'dark',
+      buttonText: 'Ir',
+      method: this.verSolicitudes.bind(this)
+    }
+  ];
+
   profile: profileDTO = {
-    firstName: '',
-    lastName: '',
-    userName: '',
-    email: '',
-    phoneNumber: '',
-    assists: 0,
-    absences: 0,
-    delays: 0,
-    country: '',
-    state: '',
-    municipality: '',
-    admissionDate: '',
-    salary: 0
+    firstName: 'Luis',
+    lastName: 'Javier',
+    userName: 'Luis_l',
+    email: 'luis@email.com',
+    phoneNumber: '555-5555',
+    assists: 100,
+    absences: 3,
+    delays: 17,
+    country: 'México',
+    state: 'Guanajuato',
+    municipality: 'León',
+    admissionDate: '2018-06-1',
+    salary: 1200
   }
 
   benefits: benefitsDTO = {
-    includesBonusA: false,
-    bonusA: 0,
+    includesBonusA: true,
+    bonusA: 1000,
     includesBonusB: false,
     bonusB: 0,
     includesBonusC: false,
     bonusC: 0,
-    holidays: 0,
-    hasHealthCare: false,
+    holidays: 14,
+    hasHealthCare: true,
     profileId: ''
   }
 
@@ -68,18 +110,7 @@ export class AdminPanelComponent  {
   getProfileById(id: string) {
     this.adminPanelService.getProfileById(id)
     .subscribe({
-      next: (profile) => { 
-        this.profile = profile 
-      
-      console.log()
-      console.log()
-      console.log()
-      console.log()
-      console.log()
-      console.log()
-      
-      
-      },
+      next: (profile) => { this.profile = profile },
       error: (error) => {console.log(error)}
     })
   }
@@ -93,14 +124,16 @@ export class AdminPanelComponent  {
     })
   }
 
+  public profileVisible = false;
+  public benefitsVisible = false;
 
-  
+  toggleProfile() {
+    this.profileVisible = !this.profileVisible;
+  }
 
-
-  
-
-  showProfileInfo: boolean = false;
-  showBenefitsInfo: boolean = false;
+  toggleBenefits() {
+    this.benefitsVisible = !this.benefitsVisible;
+  }
 
   verActividades() {
     this.activatedRoute.params.subscribe(params => {
@@ -118,21 +151,5 @@ export class AdminPanelComponent  {
     this.activatedRoute.params.subscribe(params => {
       this.router.navigate([`/solicitudes/${params['id']}`])
     })
-  }
-
-  toggleProfileInfo() {
-    this.showProfileInfo = !this.showProfileInfo;
-
-    if (this.showBenefitsInfo) {
-      this.showBenefitsInfo = false
-    }
-  }
-
-  toggleBenefitsInfo() {
-    this.showBenefitsInfo = !this.showBenefitsInfo;
-
-    if (this.showProfileInfo) {
-      this.showProfileInfo = false
-    }
   }
 }
