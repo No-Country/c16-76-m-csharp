@@ -11,7 +11,64 @@ export class PermissionsComponent {
 
   constructor(private adminPanelService: AdminPanelService) {}
 
-  permissions: permissionDTO[] = []
+  // permissions: permissionDTO[] = []
+  permissions: permissionDTO[] = [
+    {
+      id: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      daysAmount: 4,
+      limitDays: 6,
+      date: '2020-01-01',
+      statusId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      statusName: 'Aprobada',
+      typeId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      typeName: 'Trámite',
+      profileId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+    },
+    {
+      id: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      daysAmount: 4,
+      limitDays: 6,
+      date: '2020-01-01',
+      statusId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      statusName: 'Aprobada',
+      typeId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      typeName: 'Trámite',
+      profileId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+    },
+    {
+      id: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      daysAmount: 4,
+      limitDays: 6,
+      date: '2020-01-01',
+      statusId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      statusName: 'Aprobada',
+      typeId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      typeName: 'Trámite',
+      profileId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+    },
+    {
+      id: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      daysAmount: 4,
+      limitDays: 6,
+      date: '2020-01-01',
+      statusId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      statusName: 'Aprobada',
+      typeId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      typeName: 'Trámite',
+      profileId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+    },
+    {
+      id: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      daysAmount: 4,
+      limitDays: 6,
+      date: '2020-01-01',
+      statusId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      statusName: 'Aprobada',
+      typeId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+      typeName: 'Trámite',
+      profileId: '99f7ca8d-1304-40cc-bc1d-59186f4543f2',
+    },
+  ]
 
   ngOnInit(): void {
     this.getAllPermissions()
@@ -25,15 +82,4 @@ export class PermissionsComponent {
     })
   }
 
-
-
-  public visible = false;
-
-  toggleLiveDemo() {
-    this.visible = !this.visible;
-  }
-
-  handleLiveDemoChange(event: any) {
-    this.visible = event;
-  }
 }

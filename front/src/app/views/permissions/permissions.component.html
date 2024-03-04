@@ -1,34 +1,24 @@
 <h4>Listado de Solicitudes</h4>
 
-<br>
+<hr>
 
-
-
-
-
-<div *ngFor="let permission of permissions">
-
-    <span>| {{permission.id}} |</span>
-    <span>| {{permission.date}} |</span>
-    <span>| {{permission.daysAmount}} |</span>
-    <span>| {{permission.limitDays}} |</span>
-    <span>| {{permission.typeName}} |</span>
-    <span>| {{permission.statusName}} |</span>
-        
-</div>
-
-<button (click)="toggleLiveDemo()" cButton>Launch demo modal</button>
-
-<c-modal id="liveDemoModal" [visible]="visible" (visibleChange)="handleLiveDemoChange($event)">
-  <c-modal-header>
-    <h5 cModalTitle>Modal title</h5>
-    <button (click)="toggleLiveDemo()" cButtonClose></button>
-  </c-modal-header>
-  <c-modal-body>Woohoo, you are reading this text in a modal!</c-modal-body>
-  <c-modal-footer>
-    <button (click)="toggleLiveDemo()" cButton color="secondary">
-      Close
-    </button>
-    <button cButton color="primary">Save changes</button>
-  </c-modal-footer>
-</c-modal>
+<table cTable small>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Días Solicitados</th>
+            <th scope="col">Estatus</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let permission of permissions;let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{permission.typeName}}</td>
+            <td>{{permission.date}}</td>
+            <td>{{permission.daysAmount}}</td>
+            <td>{{permission.statusName}}</td>
+        </tr>
+    </tbody>
+</table>
