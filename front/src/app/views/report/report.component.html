@@ -1,11 +1,11 @@
-<h4>No. de Reporte: {{report.id}}</h4>
+<h4><strong>No. de Reporte: </strong>{{report.id}}</h4>
 
-<br>
-
-<a>Evaluación del {{report.date}}</a> 
 <hr>
-<p>Desempeño: {{report.performance}}</p> 
-<p>Objetivos Alcanzados: {{report.achivedGoals}}</p> 
-<p>Dinero Ahorrado: {{report.savedMoney}}</p> 
-<p>Perfil: {{report.profileId}}</p> 
-<p>Comentarios: {{report.comments}}</p> 
+
+<p><strong>Fecha de Evaluación: </strong>{{report.date}}</p>
+<p><strong>Calificación de Desempeño: </strong>{{report.performance}}</p>
+<p><strong>Objetivos Alcanzados: </strong>{{report.achivedGoals | percent}}</p>
+<p><strong>Dinero Ahorrado: </strong>{{report.savedMoney | currency}}</p>
+<p hidden><strong>Perfil: </strong>{{report.profileId}}</p>
+<p><strong>Comentarios: </strong></p>
+<p>{{report.comments}}</p>

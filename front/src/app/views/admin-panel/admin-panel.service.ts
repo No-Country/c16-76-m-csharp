@@ -58,4 +58,10 @@ export class AdminPanelService {
       map(response => response.data)
     )
   }
+
+  public getReportById(id: string):Observable<reportDTO>{
+    return this.http.get<baseResponse>(`${this.apiURL}/Report/${id}`).pipe(
+      map(response => response.data)
+    )
+  }
 }
