@@ -1,7 +1,30 @@
 <h4>Listado de Evaluaciones</h4>
 
-<br>
+<hr>
 
-<div *ngFor="let report of reports">
-    <a routerLink="/evaluaciones/ver/{{report.id}}" >Evaluación del {{report.date}}</a> 
-</div>
+<table cTable small>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">No de Reporte</th>
+            <th scope="col">Fecha de Reporte</th>
+            <th scope="col">Evaluación de Desempeño</th>
+            <th scope="col">% de Objetivos Alcanzados</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let report of reports;let i = index">
+            <th scope="row">{{i + 1}}</th>
+            
+            <td>
+                <a routerLink="/evaluaciones/ver/{{report.id}}">
+                    {{report.id}}
+                </a>
+            </td>
+
+            <td>{{report.date}}</td>
+            <td>{{report.performance}}</td>
+            <td>{{report.achivedGoals | percent}}</td>
+        </tr>
+    </tbody>
+</table>

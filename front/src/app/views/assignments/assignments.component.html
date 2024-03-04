@@ -1,12 +1,24 @@
 <h4>Listado de Actividades</h4>
 
-<br>
+<hr>
 
-<div *ngFor="let assignment of assignments">
-    <span >| {{assignment.id}} |</span>
-    <span>| {{assignment.name}} |</span>
-    <span hidden>| {{assignment.description}} |</span>
-    <span>| {{assignment.startDate}} |</span>
-    <span>| {{assignment.endDate}} |</span>
-    <span>| {{assignment.statusName}} |</span>
-</div>
+<table cTable small>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Actividad</th>
+            <th scope="col">Fecha de Inicio</th>
+            <th scope="col">Fecha Estimada de Término</th>
+            <th scope="col">Estaus</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let assignment of assignments;let i = index">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{assignment.name}}</td>
+            <td>{{assignment.startDate}}</td>
+            <td>{{assignment.endDate}}</td>
+            <td>{{assignment.statusName}}</td>
+        </tr>
+    </tbody>
+</table>
