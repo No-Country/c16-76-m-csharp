@@ -54,7 +54,9 @@ class UserService : IUserService
     {
         var user = await _appDbContext.AppUsers
             .Where(x => x.IsDeleted == false)
-            // .Include(x => x.Profile)
+            .Include(p => p.Profile)
+                .ThenInclude(p => p.BenefitsSummary)
+            .Where(p => !p.Profile.IsDeleted)
             .FirstOrDefaultAsync(u => u.Id == id);
 
         var dto = _mapper.Map<UserDto>(user);

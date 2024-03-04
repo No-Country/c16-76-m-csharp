@@ -5,4 +5,6 @@ export interface user {
     lastName: string
     email: string
     phoneNumber: string
+    profileId: string
+    benefitsId: string
 }

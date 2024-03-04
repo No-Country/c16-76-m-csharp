@@ -208,9 +208,6 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
@@ -433,7 +430,7 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Assist")
+                    b.Property<int>("Assists")
                         .HasColumnType("int");
 
                     b.Property<string>("Country")

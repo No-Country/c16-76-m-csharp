@@ -13,6 +13,6 @@ namespace back.DTOs
         public double BonusC { get; set; }
         public int Holidays { get; set; }
         public bool HasHealthCare { get; set; }
-        public UserProfile Profile { get; set; }
+        public string ProfileId { get; set; }
     }
 }

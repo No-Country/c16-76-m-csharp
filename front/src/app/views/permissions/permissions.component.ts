@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { permissionDTO} from '../permissions/interfaces/permissionDTO'
+import { AdminPanelService} from '../admin-panel/admin-panel.service'
 
 @Component({
   selector: 'app-permissions',
@@ -8,117 +9,19 @@ import { permissionDTO} from '../permissions/interfaces/permissionDTO'
 })
 export class PermissionsComponent {
 
-  permissions: permissionDTO[] = [
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      daysAmount: 2,
-      limitDays: 3,
-      date: "2020-10-01",
-      statusId: "11111",
-      statusName: "Enviada",
-      typeId: "11111",
-      typeName: "Trámite",
-      profileId: "11111",
-    },
-    
-  ]
+  constructor(private adminPanelService: AdminPanelService) {}
+
+  permissions: permissionDTO[] = []
+
+  ngOnInit(): void {
+    this.getAllPermissions()
+  }
+
+  getAllPermissions(pageSize: number = 50, pageNumber: number = 1) {
+    this.adminPanelService.getAllPermissions(pageSize, pageNumber)
+    .subscribe({
+      next: permissions => {this.permissions = permissions},
+      error: error => console.log(error)
+    })
+  }
 }

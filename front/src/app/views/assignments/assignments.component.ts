@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { assignmentDTO} from '../assignments/interfaces/assignmentDTO'
+import { AdminPanelService} from '../admin-panel/admin-panel.service'
+
 
 @Component({
   selector: 'app-assignments',
@@ -8,106 +10,20 @@ import { assignmentDTO} from '../assignments/interfaces/assignmentDTO'
 })
 export class AssignmentsComponent {
 
-  assignments: assignmentDTO[] = [
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-    {
-      id: "11111",
-      name: "Crear CRUD  de Assignments",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vero sit est iure! Maiores eligendi perspiciatis eveniet nihil hic quasi quis, ipsum nostrum mollitia animi error et, vero cupiditate sapiente?",
-      startDate: "2020-02-01",
-      endDate: "2021-02-01",
-      statusId: "11111",
-      statusName: "Finalizada",
-      profileId: "11111",
-    },
-  ]
+  constructor(private adminPanelService: AdminPanelService) {}
+
+  assignments!: assignmentDTO[]
+
+  ngOnInit(): void {
+    this.getAllAssignmets()
+  }
+
+  getAllAssignmets(pageSize: number = 50, pageNumber: number = 1) {
+    this.adminPanelService.getAllAssignmets(pageSize, pageNumber)
+    .subscribe({
+      next: assignments => {this.assignments = assignments},
+      error: error => console.log(error)
+    })
+  }
+
 }

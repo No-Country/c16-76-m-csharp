@@ -15,7 +15,7 @@ namespace back.Validations
                 .NotNull()
                 .WithMessage("The {PropertyName} field is required.");
 
-            RuleFor(p => p.Assist)
+            RuleFor(p => p.Assists)
                 .NotNull()
                 .WithMessage("The {PropertyName} field is required.");
 

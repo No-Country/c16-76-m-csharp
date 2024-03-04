@@ -4,12 +4,12 @@ export interface profileDTO {
     userName: string,
     email: string,
     phoneNumber: string,
-    Assists: number,
-    Absences: number,
-    Delays: number,
-    Country: string,
-    State: string,
-    Municipality: string,
+    assists: number,
+    absences: number,
+    delays: number,
+    country: string,
+    state: string,
+    municipality: string,
     admissionDate: string,
-    Salary: number
+    salary: number
 }

@@ -18,13 +18,13 @@
 <div *ngIf="showProfileInfo">
     <div>
         <h4>Perfil</h4>
-        <p>Asistencias: {{profile.Assists}}</p>
-        <p>Faltas: {{profile.Absences}}</p>
-        <p>Retardos: {{profile.Delays}}</p>
-        <p>País: {{profile.Country}}</p>
-        <p>Estado: {{profile.State}}</p>
-        <p>Municipio: {{profile.Municipality}}</p>
-        <p>Sueldo (Mensual): {{profile.Salary | currency}}</p>
+        <p>Asistencias: {{profile.assists}}</p>
+        <p>Faltas: {{profile.absences}}</p>
+        <p>Retardos: {{profile.delays}}</p>
+        <p>País: {{profile.country}}</p>
+        <p>Estado: {{profile.state}}</p>
+        <p>Municipio: {{profile.municipality}}</p>
+        <p>Sueldo (Mensual): {{profile.salary | currency}}</p>
         <p>Fecha de Ingreso: {{profile.admissionDate}}</p>
     </div>
 </div>
@@ -32,14 +32,10 @@
 <div *ngIf="showBenefitsInfo">
     <div>
         <h4>Prestaciones</h4>
-        <p>IncludesBonusA: {{benefits.IncludesBonusA}}</p>
-        <p>BonusA: {{benefits.BonusA}}</p>
-        <p>IncludesBonusB: {{benefits.IncludesBonusB}}</p>
-        <p>BonusB: {{benefits.BonusB}}</p>
-        <p>IncludesBonusC: {{benefits.IncludesBonusC}}</p>
-        <p>BonusC: {{benefits.BonusC}}</p>
-        <p>Holidays: {{benefits.Holidays}}</p>
-        <p>HasHealthCare: {{benefits.HasHealthCare}}</p>
-        <p>ProfileId: {{benefits.ProfileId}}</p>
+        <p>Bono Nivel A: {{benefits.bonusA}}</p>
+        <p *ngIf="benefits.includesBonusB">Bono Nivel B: {{benefits.bonusB}}</p>
+        <p *ngIf="benefits.includesBonusC">Bono Nivel C: {{benefits.bonusC}}</p>
+        <p>Holidays: {{benefits.holidays}}</p>
+        <p *ngIf="benefits.hasHealthCare">Seguro Médico: Incluido</p>
     </div>
 </div>

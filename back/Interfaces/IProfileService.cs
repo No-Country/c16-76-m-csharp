@@ -10,7 +10,7 @@ namespace back.Interfaces
     {
        public Task<BaseResponse<string>> AddProfile(ProfileRequestDTO profile);
 
-       public Task<BaseResponse<List<ProfilesDto>>> GetProfiles(int pageSize, int pageNumber);
+       public Task<BaseResponse<List<ProfileDto>>> GetProfiles(int pageSize, int pageNumber);
 
        public Task<BaseResponse<ProfileDto>> GetProfileById(string id);
 

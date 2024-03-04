@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { reportDTO} from '../reports/interfaces/reportDTO'
+import { AdminPanelService} from '../admin-panel/admin-panel.service'
 
 @Component({
   selector: 'app-reports',
@@ -8,60 +9,19 @@ import { reportDTO} from '../reports/interfaces/reportDTO'
 })
 export class ReportsComponent {
 
-  reports: reportDTO[] = [
-    {
-      id: '111111111111',
-      date: '2020-01-01',
-      performance:10,
-      achivedGoals:false,
-      savedMoney: 2000,
-      profileId:'11111111',
-      comments:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odio ex doloribus nostrum, fugit eum aliquam, corrupti dolorum earum incidunt tempora reiciendis unde aliquid in perferendis. Eos consequatur iusto aliquid!'
-    },
-    {
-      id: '111111111111',
-      date: '2020-01-01',
-      performance:10,
-      achivedGoals:false,
-      savedMoney: 2000,
-      profileId:'11111111',
-      comments:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odio ex doloribus nostrum, fugit eum aliquam, corrupti dolorum earum incidunt tempora reiciendis unde aliquid in perferendis. Eos consequatur iusto aliquid!'
-    },
-    {
-      id: '111111111111',
-      date: '2020-01-01',
-      performance:10,
-      achivedGoals:false,
-      savedMoney: 2000,
-      profileId:'11111111',
-      comments:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odio ex doloribus nostrum, fugit eum aliquam, corrupti dolorum earum incidunt tempora reiciendis unde aliquid in perferendis. Eos consequatur iusto aliquid!'
-    },
-    {
-      id: '111111111111',
-      date: '2020-01-01',
-      performance:10,
-      achivedGoals:false,
-      savedMoney: 2000,
-      profileId:'11111111',
-      comments:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odio ex doloribus nostrum, fugit eum aliquam, corrupti dolorum earum incidunt tempora reiciendis unde aliquid in perferendis. Eos consequatur iusto aliquid!'
-    },
-    {
-      id: '111111111111',
-      date: '2020-01-01',
-      performance:10,
-      achivedGoals:false,
-      savedMoney: 2000,
-      profileId:'11111111',
-      comments:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odio ex doloribus nostrum, fugit eum aliquam, corrupti dolorum earum incidunt tempora reiciendis unde aliquid in perferendis. Eos consequatur iusto aliquid!'
-    },
-    {
-      id: '111111111111',
-      date: '2020-01-01',
-      performance:10,
-      achivedGoals:false,
-      savedMoney: 2000,
-      profileId:'11111111',
-      comments:'Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque odio ex doloribus nostrum, fugit eum aliquam, corrupti dolorum earum incidunt tempora reiciendis unde aliquid in perferendis. Eos consequatur iusto aliquid!'
-    }
-  ]
+  constructor(private adminPanelService: AdminPanelService) {}
+
+  reports: reportDTO[] = []
+
+  ngOnInit(): void {
+    this.getAllReports()
+  }
+
+  getAllReports(pageSize: number = 50, pageNumber: number = 1) {
+    this.adminPanelService.getAllReports(pageSize, pageNumber)
+    .subscribe({
+      next: reports => {this.reports = reports},
+      error: error => console.log(error)
+    })
+  }
 }

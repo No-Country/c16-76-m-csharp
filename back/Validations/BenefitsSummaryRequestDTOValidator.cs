@@ -42,6 +42,10 @@ namespace back.Validations
                 .NotNull()
                 .WithMessage("The {PropertyName} field is required.");
 
+            RuleFor(p => p.ProfileId)
+                .NotNull()
+                .WithMessage("The {PropertyName} field is required.");
+
         }
     }
 }

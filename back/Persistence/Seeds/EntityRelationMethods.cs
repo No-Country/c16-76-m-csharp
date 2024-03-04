@@ -8,14 +8,14 @@ namespace back.Persistence.Seeds
         {
             var profile = new UserProfile()
             {
-                Assist = 0,
+                Assists = 0,
                 Absences = 0,
                 Delays = 0,
                 Country = "NoCountry",
                 State = "NoState",
                 Municipality = "NoMunicipality",
                 Salary = 500,
-                AdmissionDate = "10/10/02",
+                AdmissionDate = "2022-03-03T17:02:28.190Z",
                 BenefitsSummary = SeedBenefitsSummary()
             };
 
