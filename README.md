@@ -1,15 +1,14 @@
-# EmpleaGestión
+# TeamTrack
 
 ## Descripción
 
-EmpleaGestión es una aplicación de gestión de empleados diseñada para facilitar la administración de recursos humanos en empresas de cualquier tamaño. Permite a los empleadores llevar un seguimiento eficiente de la información personal, laboral y de desempeño de sus empleados.
+TeamTrack es una aplicación de gestión de empleados diseñada para facilitar la administración de recursos humanos en empresas de cualquier tamaño. Permite a los empleadores, administradores y empleados de alto rango llevar un seguimiento eficiente de la información personal, laboral y de desempeño de sus empleados.
 
 ## Funcionalidades Principales
 
 - Gestión de Empleados: Permite agregar, editar y eliminar perfiles de empleados, incluyendo información personal, de contacto, laboral y de remuneración
 - Registro de Asistencia: Permite registrar la asistencia diaria de los empleados, incluyendo entradas y salidas, así como permisos y ausencias.
 - Evaluación de Desempeño: Facilita la evaluación del desempeño de los empleados mediante la creación de criterios personalizados, asignación de puntajes y generación de informes- Gestión de Vacaciones y Ausencias: Permite gestionar solicitudes de vacaciones, permisos y ausencias, así como llevar un registro del tiempo de vacaciones acumulado por cada empleado.
-- Comunicación Interna: Incluye un sistema de mensajería interna para facilitar la comunicación entre empleados y empleadores, así como entre equipos de trabajo.
 - Reportes y Estadísticas: Genera reportes y estadísticas detalladas sobre la asistencia, desempeño y otros aspectos relevantes del personal.
 
 ## Integrantes y Roles
@@ -29,15 +28,19 @@ EmpleaGestión es una aplicación de gestión de empleados diseñada para facili
 | Nombre | Redes | Rol Principal | Rol Secundario | Rol Terciario |
 |:------:|:-----:|:-------------:|:--------------:|:-------------:|
 | <img src="https://avatars.githubusercontent.com/u/78492618?v=4" width=64> <br /> **Luis Luna** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/luisjavierluna)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/luis-javier-luna) | **Backend** | **QA Tester** | **Project Manager** |
-| <img src="https://avatars.githubusercontent.com/u/152746443?v=4" width=64> <br /> **Jhonatan Mustiola** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/JhonatanMustiolaCas)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/jhonatan-mustiola) | **Backend** | **QA Tester** | **Frontend** |
+| <img src="https://avatars.githubusercontent.com/u/50729253?v=4" width=64> <br /> **Danilo Calderón** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Danilo0203)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/danilo-calderon) | **FrontEnd** | **Diseñador UI/UX** |  |
 | <img src="https://avatars.githubusercontent.com/u/107001574?v=4" width=64> <br /> **Trinidad Benegas** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/trinidadbenegas)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/trinidadbenegas) | **Backend** | **QA Tester** |  |
 | <img src="https://avatars.githubusercontent.com/u/138414824?v=4" width=64> <br /> **Gerson Espinoza** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Dranceer)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/gerson-es) | **FrontEnd** | **Diseñador UI/UX** |  |
-| <img src="https://avatars.githubusercontent.com/u/50729253?v=4" width=64> <br /> **Danilo Calderón** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Danilo0203)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/danilo-calderon) | **FrontEnd** | **Diseñador UI/UX** |  |
-| <img src="https://avatars.githubusercontent.com/u/81488933?v=4" width=64> <br /> **Miguel Angel Bru** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/mabrumelis)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/mabrumelis) | **Backend** | **QA Tester** |  |
 | <img src="https://avatars.githubusercontent.com/u/76659188?v=4" width=64> <br /> **Arrascaeta Nahuel** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/NahuelA)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/nahuel-arrascaeta) | **Backend** | **QA Tester** |  |
+
+<!-- | <img src="https://avatars.githubusercontent.com/u/152746443?v=4" width=64> <br /> **Jhonatan Mustiola** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/JhonatanMustiolaCas)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/jhonatan-mustiola) | **Backend** | **QA Tester** | **Frontend** | 
+
+| <img src="https://avatars.githubusercontent.com/u/81488933?v=4" width=64> <br /> **Miguel Angel Bru** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/mabrumelis)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/mabrumelis) | **Backend** | **QA Tester** |  |
+
 | <img src="https://avatars.githubusercontent.com/u/84636096?v=4" width=64> <br /> **Jose Benitez** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/joseb069)</a> <br /> [ ![](https://img.shields.io/badge/linkedin%20-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white 'LinkedIn Link')](https://www.linkedin.com/in/josé-benítez-851b65185) | **Backend** | **QA Tester** |  |
+
 | <img src="https://avatars.githubusercontent.com/u/91550030?v=4" width=64> <br /> **Facundo Hernando** | [![](https://img.shields.io/badge/github-%23121011.svg?&style=for-the-badge&logo=github&logoColor=white 'Github Link')](https://github.com/Facu00H)</a> | **FrontEnd** | **Backend** |  |
-| **Marcela August** |  | **Backend** | **QA Tester** |  |
+| **Marcela August** |  | **Backend** | **QA Tester** |  | -->
 
 
 ## 🖥️ Stack
@@ -74,3 +77,7 @@ EmpleaGestión es una aplicación de gestión de empleados diseñada para facili
 | Videollamadas y Chat | ![Github Projects](https://img.shields.io/badge/google%20meet-ffffff?style=for-the-badge&logo=googleMeet&logoColor=red) |
 | Chat | ![Slack](https://img.shields.io/badge/Slack-%234A154B?style=for-the-badge&logo=Slack&logoColor=white) |
 | Gestor de Tareas | ![Github Projects](https://img.shields.io/badge/github-00000?style=for-the-badge&logo=github&color=black) |
+
+### Base de Datos
+
+![imagen](https://github.com/No-Country/c16-76-m-csharp/assets/78492618/2d0d76b4-cf55-4405-a3eb-da93f8f6f9c6)
