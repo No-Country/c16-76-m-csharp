@@ -1,5 +1,7 @@
 # TeamTrack
 
+![logo](https://github.com/No-Country/c16-76-m-csharp/assets/78492618/8092399d-70b2-4ac6-9286-883562ddf557)
+
 ## Descripción
 
 TeamTrack es una aplicación de gestión de empleados diseñada para facilitar la administración de recursos humanos en empresas de cualquier tamaño. Permite a los empleadores, administradores y empleados de alto rango llevar un seguimiento eficiente de la información personal, laboral y de desempeño de sus empleados.
