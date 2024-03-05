@@ -14,75 +14,92 @@
         <input cFormControl id="inputPassword4" type="password" />
       </c-col>
       <c-col [xs]="12">
-        <label cLabel for="inputAddress">Address</label>
-        <input cFormControl id="inputAddress" placeholder="1234 Main St" />
+        <label cLabel for="inputAddress">Fecha de Inicio</label>
+        <input cFormControl id="inputAddress" placeholder="2023/12/04" />
       </c-col>
       <c-col [xs]="12">
-        <label cLabel for="inputAddress2">Address 2</label>
-        <input cFormControl id="inputAddress2" placeholder="Apartment, studio, or floor" />
+        <label cLabel for="inputAddress2">Fecha de Término</label>
+        <input cFormControl id="inputAddress2" placeholder="2023/12/10" />
       </c-col>
       <c-col [md]="6">
-        <label cLabel for="inputCity">City</label>
+        <label cLabel for="inputCity">Cantidad de Días Solicitados</label>
         <input cFormControl id="inputCity" />
       </c-col>
       <c-col [md]="4">
-        <label cLabel for="inputState">State</label>
+        <label cLabel for="inputState">Tipo de Permiso</label>
         <select cSelect id="inputState">
           <option>Choose...</option>
-          <option>...</option>
+          <option>Paternidad</option>
+          <option>Deberes inexcusables</option>
+          <option>Matrimonio</option>
+          <option>Médico o accidente</option>
+          <option>Formación</option>
+          <option>Maternidad</option>
+          <option>Trámite</option>
+          <option>Mudanza</option>
+          <option>Fallecimiento, accidente o enfermedad grave de familiar</option>
         </select>
       </c-col>
-      <c-col [md]="2">
+      <!-- <c-col [md]="2">
         <label cLabel for="inputZip">Zip</label>
         <input cFormControl id="inputZip" />
-      </c-col>
+      </c-col> -->
       <c-col [xs]="12">
-        <c-form-check>
+        <!-- <c-form-check>
           <input cFormCheckInput id="gridCheck" name="gridCheck" type="checkbox" />
           <label cFormCheckLabel for="gridCheck">Check me out</label>
-        </c-form-check>
+        </c-form-check> -->
       </c-col>
       <c-col [xs]="12">
-        <button cButton type="submit">Sign in</button>
+        <button cButton class="btn btn-success text-white"  type="submit">Enviar Solicitud</button>
       </c-col>
     </form>
   </c-modal-body>
   <c-modal-footer>
-    <button cButton [cModalToggle]="fullScreen.id">Close</button>
+    <button cButton color="dark" [cModalToggle]="fullScreen.id">Close</button>
   </c-modal-footer>
 </c-modal>
+
+<c-container [fluid]="true" class="mb-3 d-flex justify-content-end">
+  <button 
+      [cModalToggle]="fullScreen.id" 
+      class="btn btn-success text-white" 
+      cButton>
+    Crear solicitud
+  </button>
+</c-container>
 
 <table class="table table-hover">
   <thead>
     <tr>
       <th scope="col">N°</th>
-      <th scope="col">Tipo Solicitud</th>
-      <th scope="col">Urgencia</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Fecha</th>
+      <th scope="col">Días Solicitados</th>
       <th scope="col">Estado</th>
-      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td>Vacaciones</td>
-      <td>Media</td>
-      <td><strong>Enviada</strong></td>
-      <td><button [cModalToggle]="fullScreen.id" cButton>Crear solicitud</button></td>
+      <td>Trámite</td>
+      <td>2020-03-23</td>
+      <td>1</td>
+      <td><strong>Aprobada</strong></td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td>Día libre</td>
-      <td>Alta</td>
-      <td><strong>Enviada</strong></td>
-      <td><button [cModalToggle]="fullScreen.id" cButton>Crear solicitud</button></td>
+      <td>Formación</td>
+      <td>2017-12-12</td>
+      <td>5</td>
+      <td><strong>Aprobada</strong></td>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td>Cita Médica</td>
-      <td>Baja</td>
-      <td><strong>Enviada</strong></td>
-      <td><button [cModalToggle]="fullScreen.id" cButton>Crear solicitud</button></td>
+      <td>Médico o accidente</td>
+      <td>2013-10-11</td>
+      <td>14</td>
+      <td><strong>Aprobada</strong></td>
     </tr>
   </tbody>
 </table>

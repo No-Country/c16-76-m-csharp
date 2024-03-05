@@ -2,7 +2,7 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'Panel de Empleados',
+    name: 'Panel de Empleado',
     url: '/panel',
     iconComponent: { name: 'cil-home' },
   },

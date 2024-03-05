@@ -3,13 +3,13 @@
     <c-widget-stat-a
       class="mb-4"
       color="primary"
-      title="Users"
+      title="Amount Saved (2023)"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        26K
-        <span class="fs-6 fw-normal">
+        $260,000
+        <!-- <span class="fs-6 fw-normal">
           (-12.4% <svg cIcon name="cilArrowBottom"></svg>)
-        </span>
+        </span> -->
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -36,14 +36,14 @@
   </c-col>
   <c-col sm="6" xl="3">
     <c-widget-stat-a
-      [title]="'Income'"
+      [title]="'Salary'"
       class="mb-4"
       color="info"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>$6.200</span>
+        <span>$6,200</span>
         <span class="fs-6 fw-normal">
-          (40.9%<svg cIcon name="cilArrowTop"></svg>)
+          (25.9%<svg cIcon name="cilArrowTop"></svg>)
         </span>
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
@@ -66,15 +66,15 @@
   </c-col>
   <c-col sm="6" xl="3">
     <c-widget-stat-a
-      [title]="'Conversion Rate'"
+      [title]="'Performance'"
       class="mb-4"
       color="warning"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>2.49</span>
-        <span class="fs-6 fw-normal">
-          (84.7% <svg cIcon name="cilArrowTop"></svg>)
-        </span>
+        <span>94.7%</span>
+        <!-- <span class="fs-6 fw-normal">
+          ( <svg cIcon name="cilArrowTop"></svg>)
+        </span> -->
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -96,14 +96,14 @@
   </c-col>
   <c-col sm="6" xl="3">
     <c-widget-stat-a
-      [title]="'Sessions'"
+      [title]="'Rank'"
       class="mb-4"
       color="danger"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>44K</span>
+        <span>12</span>
         <span class="fs-6 fw-normal">
-          (-23.6% <svg cIcon name="cilArrowBottom"></svg>)
+          th <svg cIcon name="cilArrowTop"></svg>
         </span>
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
