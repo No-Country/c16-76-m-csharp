@@ -12,7 +12,7 @@ export class EmployeesService {
 
   constructor(private http: HttpClient) { }
 
-  private apiURL = 'https://localhost:7286/api/' + 'User'
+  private apiURL = 'https://back20240306103842.azurewebsites.net//api/' + 'User'
 
   // employees: user[] = [
   //   {

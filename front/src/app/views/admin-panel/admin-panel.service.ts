@@ -15,7 +15,7 @@ export class AdminPanelService {
 
   constructor(private http: HttpClient) { }
 
-  private apiURL = 'https://localhost:7286/api'
+  private apiURL = 'https://back20240306103842.azurewebsites.net//api'
 
   public getProfileById(id: string):Observable<profileDTO>{
     return this.http.get<baseResponse>(`${this.apiURL}/Profile/${id}`).pipe(
