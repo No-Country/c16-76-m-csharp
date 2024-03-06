@@ -54,11 +54,6 @@ const routes: Routes = [
           import('./views/buttons/buttons.module').then((m) => m.ButtonsModule),
       },
       {
-        path: 'charts',
-        loadChildren: () =>
-          import('./views/charts/charts.module').then((m) => m.ChartsModule),
-      },
-      {
         path: 'widgets',
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule),
