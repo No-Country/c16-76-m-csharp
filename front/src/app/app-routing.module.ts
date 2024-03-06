@@ -44,11 +44,6 @@ const routes: Routes = [
       { path: 'evaluaciones/ver/:reportid', component: ReportComponent },
       { path: 'solicitudes/:id', component: PermissionsComponent },
       {
-        path: 'buttons',
-        loadChildren: () =>
-          import('./views/buttons/buttons.module').then((m) => m.ButtonsModule),
-      },
-      {
         path: 'widgets',
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule),
