@@ -78,7 +78,7 @@ app.MapControllers();
 
 try
 {
-    await SeedUsers();
+    // await SeedUsers();
 
     app.Run();
 }
