@@ -344,3 +344,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# API Deploy Files
+dotnet-tools.json
+serviceDependencies.back20240306103842 - Web Deploy.json
+serviceDependencies.json
+mssql1.arm.json
+profile.arm.json
