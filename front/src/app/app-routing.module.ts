@@ -64,11 +64,6 @@ const routes: Routes = [
           import('./views/charts/charts.module').then((m) => m.ChartsModule),
       },
       {
-        path: 'icons',
-        loadChildren: () =>
-          import('./views/icons/icons.module').then((m) => m.IconsModule),
-      },
-      {
         path: 'widgets',
         loadChildren: () =>
           import('./views/widgets/widgets.module').then((m) => m.WidgetsModule),
